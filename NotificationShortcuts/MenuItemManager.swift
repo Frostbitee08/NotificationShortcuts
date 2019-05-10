@@ -11,6 +11,7 @@ import Cocoa
 
 class MenuItemManager: NSObject, NSMenuDelegate {
     private let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+    private let preferencesViewController = PreferencesViewController()
     private let menu = NSMenu(title: "menu")
     private var window: NSWindow? = nil
     
@@ -26,8 +27,16 @@ class MenuItemManager: NSObject, NSMenuDelegate {
     
     //MARK: Actions
     @objc private func showPrefrences() {
-        self.window = nil
-        //TODO: Implement
+        //Instantiate Window
+        self.window = NSWindow.init(contentViewController: self.preferencesViewController)
+        self.window?.maxSize = PreferencesViewController.intrinsicContentSize
+        self.window?.minSize = PreferencesViewController.intrinsicContentSize
+        
+        //Display Window
+        self.window?.makeKeyAndOrderFront(NSApplication.shared.delegate)
+        let windowController = NSWindowController(window: self.window)
+        windowController.showWindow(NSApplication.shared.delegate)
+        NSApp.activate(ignoringOtherApps: true)
     }
     
     @objc private func quitApplication() {

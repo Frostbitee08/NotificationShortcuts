@@ -9,6 +9,9 @@
 import Cocoa
 import Foundation
 
+//TODO: Check for notification before executing anything
+//TODO: Move cursor back to original position after executing
+
 class NotificationHandler: NSObject {
     static let sharedInstance  = NotificationHandler()
     
@@ -26,7 +29,7 @@ class NotificationHandler: NSObject {
         }
     }
     
-    @objc public func replyToMessage() {
+    @objc public func replyToNotification() {
         self.moveMouse()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             self.clickReply()
