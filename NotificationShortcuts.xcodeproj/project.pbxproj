@@ -13,12 +13,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		84DC7CE9228529F400E144A2 /* NotificationResponders.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NotificationResponders.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		84DC7CE9228529F400E144A2 /* NotificationShortcuts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NotificationShortcuts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84DC7CEC228529F400E144A2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84DC7CEE228529F600E144A2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84DC7CF1228529F600E144A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		84DC7CF3228529F600E144A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		84DC7CF4228529F600E144A2 /* NotificationResponders.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NotificationResponders.entitlements; sourceTree = "<group>"; };
+		84DC7CF4228529F600E144A2 /* NotificationShortcuts.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NotificationShortcuts.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,7 +35,7 @@
 		84DC7CE0228529F400E144A2 = {
 			isa = PBXGroup;
 			children = (
-				84DC7CEB228529F400E144A2 /* NotificationResponders */,
+				84DC7CEB228529F400E144A2 /* NotificationShortcuts */,
 				84DC7CEA228529F400E144A2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -43,29 +43,29 @@
 		84DC7CEA228529F400E144A2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				84DC7CE9228529F400E144A2 /* NotificationResponders.app */,
+				84DC7CE9228529F400E144A2 /* NotificationShortcuts.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		84DC7CEB228529F400E144A2 /* NotificationResponders */ = {
+		84DC7CEB228529F400E144A2 /* NotificationShortcuts */ = {
 			isa = PBXGroup;
 			children = (
 				84DC7CEC228529F400E144A2 /* AppDelegate.swift */,
 				84DC7CEE228529F600E144A2 /* Assets.xcassets */,
 				84DC7CF0228529F600E144A2 /* MainMenu.xib */,
 				84DC7CF3228529F600E144A2 /* Info.plist */,
-				84DC7CF4228529F600E144A2 /* NotificationResponders.entitlements */,
+				84DC7CF4228529F600E144A2 /* NotificationShortcuts.entitlements */,
 			);
-			path = NotificationResponders;
+			path = NotificationShortcuts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		84DC7CE8228529F400E144A2 /* NotificationResponders */ = {
+		84DC7CE8228529F400E144A2 /* NotificationShortcuts */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 84DC7CF7228529F600E144A2 /* Build configuration list for PBXNativeTarget "NotificationResponders" */;
+			buildConfigurationList = 84DC7CF7228529F600E144A2 /* Build configuration list for PBXNativeTarget "NotificationShortcuts" */;
 			buildPhases = (
 				84DC7CE5228529F400E144A2 /* Sources */,
 				84DC7CE6228529F400E144A2 /* Frameworks */,
@@ -75,9 +75,9 @@
 			);
 			dependencies = (
 			);
-			name = NotificationResponders;
+			name = NotificationShortcuts;
 			productName = NotificationResponders;
-			productReference = 84DC7CE9228529F400E144A2 /* NotificationResponders.app */;
+			productReference = 84DC7CE9228529F400E144A2 /* NotificationShortcuts.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -100,7 +100,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 84DC7CE4228529F400E144A2 /* Build configuration list for PBXProject "NotificationResponders" */;
+			buildConfigurationList = 84DC7CE4228529F400E144A2 /* Build configuration list for PBXProject "NotificationShortcuts" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -113,7 +113,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				84DC7CE8228529F400E144A2 /* NotificationResponders */,
+				84DC7CE8228529F400E144A2 /* NotificationShortcuts */,
 			);
 		};
 /* End PBXProject section */
@@ -276,7 +276,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 77M726UR7J;
-				INFOPLIST_FILE = NotificationResponders/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/NotificationShortcuts/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -295,7 +295,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 77M726UR7J;
-				INFOPLIST_FILE = NotificationResponders/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/NotificationShortcuts/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -309,7 +309,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		84DC7CE4228529F400E144A2 /* Build configuration list for PBXProject "NotificationResponders" */ = {
+		84DC7CE4228529F400E144A2 /* Build configuration list for PBXProject "NotificationShortcuts" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				84DC7CF5228529F600E144A2 /* Debug */,
@@ -318,7 +318,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		84DC7CF7228529F600E144A2 /* Build configuration list for PBXNativeTarget "NotificationResponders" */ = {
+		84DC7CF7228529F600E144A2 /* Build configuration list for PBXNativeTarget "NotificationShortcuts" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				84DC7CF8228529F600E144A2 /* Debug */,

@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  NotificationResponders
+//  NotificationShortcuts
 //
 //  Created by Rocco Del Priore on 5/9/19.
 //  Copyright © 2019 Rocco Del Priore. All rights reserved.
@@ -15,8 +15,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        let x: CGFloat = 20
-        let y: CGFloat = NSScreen.main?.frame.size.height ?? 0-20.0
+        
     }
     
     @IBAction func delayedSendNotification(sender: NSObject) {
