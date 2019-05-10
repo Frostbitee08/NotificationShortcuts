@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		52781F2A1D62BD601CF18322 /* Pods_NotificationShortcuts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 829CA55F385BFD8B3C6EC2DD /* Pods_NotificationShortcuts.framework */; };
 		840E272922861E5F00B79A19 /* NotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840E272822861E5F00B79A19 /* NotificationHandler.swift */; };
+		84C478DE22862388006BFD5B /* MenuItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C478DD22862388006BFD5B /* MenuItemManager.swift */; };
+		84C478E0228629F8006BFD5B /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C478DF228629F8006BFD5B /* PreferencesViewController.swift */; };
 		84DC7CED228529F400E144A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DC7CEC228529F400E144A2 /* AppDelegate.swift */; };
 		84DC7CEF228529F600E144A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84DC7CEE228529F600E144A2 /* Assets.xcassets */; };
 		84DC7CF2228529F600E144A2 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84DC7CF0228529F600E144A2 /* MainMenu.xib */; };
@@ -17,6 +19,8 @@
 /* Begin PBXFileReference section */
 		829CA55F385BFD8B3C6EC2DD /* Pods_NotificationShortcuts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NotificationShortcuts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		840E272822861E5F00B79A19 /* NotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHandler.swift; sourceTree = "<group>"; };
+		84C478DD22862388006BFD5B /* MenuItemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemManager.swift; sourceTree = "<group>"; };
+		84C478DF228629F8006BFD5B /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		84DC7CE9228529F400E144A2 /* NotificationShortcuts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NotificationShortcuts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84DC7CEC228529F400E144A2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84DC7CEE228529F600E144A2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -59,6 +63,7 @@
 		840E272A22861E6600B79A19 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				84DC7CF0228529F600E144A2 /* MainMenu.xib */,
 				84DC7CEE228529F600E144A2 /* Assets.xcassets */,
 				84DC7CF3228529F600E144A2 /* Info.plist */,
 				84DC7CF4228529F600E144A2 /* NotificationShortcuts.entitlements */,
@@ -88,8 +93,9 @@
 			isa = PBXGroup;
 			children = (
 				84DC7CEC228529F400E144A2 /* AppDelegate.swift */,
+				84C478DD22862388006BFD5B /* MenuItemManager.swift */,
 				840E272822861E5F00B79A19 /* NotificationHandler.swift */,
-				84DC7CF0228529F600E144A2 /* MainMenu.xib */,
+				84C478DF228629F8006BFD5B /* PreferencesViewController.swift */,
 				840E272A22861E6600B79A19 /* Supporting Files */,
 			);
 			path = NotificationShortcuts;
@@ -212,7 +218,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				84DC7CED228529F400E144A2 /* AppDelegate.swift in Sources */,
+				84C478DE22862388006BFD5B /* MenuItemManager.swift in Sources */,
 				840E272922861E5F00B79A19 /* NotificationHandler.swift in Sources */,
+				84C478E0228629F8006BFD5B /* PreferencesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,6 +367,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = particleapps.NotificationResponders;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -379,6 +388,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = particleapps.NotificationResponders;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;

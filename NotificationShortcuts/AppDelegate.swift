@@ -13,9 +13,11 @@ import ShortcutRecorder
 class AppDelegate: NSObject, NSApplicationDelegate, SRRecorderControlDelegate {
 
     @IBOutlet weak var window: NSWindow!
+    
+    private var menuItemManager: MenuItemManager?
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        
+        self.menuItemManager = MenuItemManager()
     }
     
     func shortcutRecorder(_ aRecorder: SRRecorderControl!, canRecordShortcut aShortcut: [AnyHashable : Any]!) -> Bool {
@@ -53,7 +55,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SRRecorderControlDelegate {
         return !isTaken
     }
     
-    @IBAction func delayedSendNotification(sender: NSObject) {
+    func delayedSendNotification(sender: NSObject) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             self.sendNotification()
             //self.testMe()
