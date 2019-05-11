@@ -10,36 +10,15 @@ import Cocoa
 import Foundation
 
 //TODO: Check for notification before executing anything
-//TODO: Move cursor back to original position after executing
 
 class NotificationHandler: NSObject {
-    static let sharedInstance  = NotificationHandler()
+    static let sharedInstance = NotificationHandler()
+    private var mouseLocation: NSPoint? = nil
     
-    @objc public func closeNotification() {
-        self.moveMouse()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            self.clickDismiss()
-        }
-    }
-    
-    @objc public func activateNotification() {
-        self.moveMouse()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            self.clickAction()
-        }
-    }
-    
-    @objc public func replyToNotification() {
-        self.moveMouse()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            self.clickReply()
-        }
-    }
-    
-    private func moveMouse() {
+    //MARK: Helpers
+    private func moveMouse(position: CGPoint) {
         NSCursor.setHiddenUntilMouseMoves(true)
-        //TODO: Set Coordinate Dynamically Here
-        CGWarpMouseCursorPosition(CGPoint(x: 1370.0, y: 60.0))
+        CGWarpMouseCursorPosition(position)
     }
     
     private func runAppleScript(source: String) {
@@ -48,6 +27,38 @@ class NotificationHandler: NSObject {
         let output = script.executeAndReturnError(&error)
         print(output.stringValue ?? "")
         print("error: \(error as Any)")
+    }
+    
+    //MARK: Public Actions
+    @objc public func closeNotification() {
+        self.moveMouseToTarget()
+        self.clickDismiss()
+        self.moveMouseToOriginalLocation()
+    }
+    
+    @objc public func activateNotification() {
+        self.moveMouseToTarget()
+        self.clickAction()
+        self.moveMouseToOriginalLocation()
+    }
+    
+    @objc public func replyToNotification() {
+        self.moveMouseToTarget()
+        self.clickReply()
+        self.moveMouseToOriginalLocation()
+    }
+    
+    //MARK: Private Actions
+    private func moveMouseToTarget() {
+        self.mouseLocation = NSEvent.mouseLocation
+        self.moveMouse(position: CGPoint(x: (NSScreen.main?.frame.width ?? 70)-70, y: 60.0))
+    }
+    
+    private func moveMouseToOriginalLocation() {
+        if self.mouseLocation != nil {
+            self.moveMouse(position: CGPoint(x: self.mouseLocation?.x ?? 0, y: self.mouseLocation?.y ?? 0))
+            self.mouseLocation = nil
+        }
     }
     
     private func clickReply() {
