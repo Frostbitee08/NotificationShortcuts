@@ -141,6 +141,7 @@ class PreferencesViewController: NSViewController, SRRecorderControlDelegate {
         var identifier: String? = nil
         var action: Selector?   = nil
         
+        //Set Variables
         if aRecorder == replyShortCut {
             identifier = "NotificationShortCutsReply"
             action     = #selector(NotificationHandler.replyToNotification)

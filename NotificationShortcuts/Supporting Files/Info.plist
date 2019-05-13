@@ -28,7 +28,13 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>NSAppleEventsUsageDescription</key>
+	<string>We need to access your notifications.</string>
 	<key>LSUIElement</key>
 	<true/>
+    <key>com.apple.security.temporary-exception.apple-events</key>
+    <array>
+        <string>com.apple.systemevents</string>
+    </array>
 </dict>
 </plist>

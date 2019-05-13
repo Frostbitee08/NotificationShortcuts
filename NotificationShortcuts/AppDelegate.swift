@@ -18,6 +18,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         self.menuItemManager = MenuItemManager()
+        
+        let options : NSDictionary = [kAXTrustedCheckOptionPrompt.takeRetainedValue() as NSString: true]
+        let accessibilityEnabled = AXIsProcessTrustedWithOptions(options)
+        print("RDP Accessibility Enabled: ", accessibilityEnabled)
     }
     
     func delayedSendNotification(sender: NSObject) {
