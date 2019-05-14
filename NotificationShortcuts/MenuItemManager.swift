@@ -49,16 +49,67 @@ class MenuItemManager: NSObject, NSMenuDelegate {
         self.menu.removeAllItems()
         
         //Instantiate Local Varibales
+        let replyItem       = NSMenuItem(title: "Reply Shortcut", action: nil, keyEquivalent: "")
+        let actionItem      = NSMenuItem(title: "Action Shortcut", action: nil, keyEquivalent: "")
+        let dismissItem     = NSMenuItem(title: "Dismiss Shortcut", action: nil, keyEquivalent: "")
+        let seperatorItem   = NSMenuItem.separator()
         let preferencesItem = NSMenuItem(title: "Preferences", action: #selector(self.showPrefrences), keyEquivalent: ",")
-        let quitItem = NSMenuItem(title: "Quit Notification Shotcuts", action: #selector(self.quitApplication), keyEquivalent: "q")
+        let quitItem        = NSMenuItem(title: "Quit Notification Shotcuts", action: #selector(self.quitApplication), keyEquivalent: "q")
         //TODO: Add Check for Update
-        //TODO: Add Indicators for current shortcuts
         
         //Set Properties
         preferencesItem.target = self
         quitItem.target = self
         
+        //TODO: Get All Modifier Flags working
+        if let shortcut = PreferencesManager.sharedInstance.shortCutForIdentifier(identifier: ShortCutIdentifier.reply) {
+            replyItem.isEnabled = true
+            replyItem.action = #selector(NotificationHandler.replyToNotification)
+            replyItem.target = NotificationHandler.sharedInstance
+            if let keyEquivalent = shortcut["characters"] as? String {
+                replyItem.keyEquivalent = keyEquivalent
+            }
+            if let flags = shortcut["modifierFlags"] as? String, let flagsInt = UInt(flags) {
+                replyItem.keyEquivalentModifierMask = NSEvent.ModifierFlags(rawValue: flagsInt)
+            }
+        }
+        else {
+            replyItem.isEnabled = false
+        }
+        if let shortcut = PreferencesManager.sharedInstance.shortCutForIdentifier(identifier: ShortCutIdentifier.action) {
+            actionItem.isEnabled = true
+            actionItem.action = #selector(NotificationHandler.activateNotification)
+            actionItem.target = NotificationHandler.sharedInstance
+            if let keyEquivalent = shortcut["characters"] as? String {
+                actionItem.keyEquivalent = keyEquivalent
+            }
+            if let flags = shortcut["modifierFlags"] as? String, let flagsInt = UInt(flags) {
+                actionItem.keyEquivalentModifierMask = NSEvent.ModifierFlags(rawValue: flagsInt)
+            }
+        }
+        else {
+            actionItem.isEnabled = false
+        }
+        if let shortcut = PreferencesManager.sharedInstance.shortCutForIdentifier(identifier: ShortCutIdentifier.dismiss) {
+            dismissItem.isEnabled = true
+            dismissItem.action = #selector(NotificationHandler.closeNotification)
+            dismissItem.target = NotificationHandler.sharedInstance
+            if let keyEquivalent = shortcut["characters"] as? String {
+                dismissItem.keyEquivalent = keyEquivalent
+            }
+            if let flags = shortcut["modifierFlags"] as? String, let flagsInt = UInt(flags) {
+                dismissItem.keyEquivalentModifierMask = NSEvent.ModifierFlags(rawValue: flagsInt)
+            }
+        }
+        else {
+            dismissItem.isEnabled = false
+        }
+        
         //Add Items
+        self.menu.addItem(replyItem)
+        self.menu.addItem(actionItem)
+        self.menu.addItem(dismissItem)
+        self.menu.addItem(seperatorItem)
         self.menu.addItem(preferencesItem)
         self.menu.addItem(quitItem)
     }
