@@ -64,7 +64,7 @@ class PreferencesViewController: NSViewController, SRRecorderControlDelegate {
         }
         
         //Set Individual Properties
-        self.title                     = "Notification Shortcuts"
+        self.title                     = "Preferences"
         replyShortCut.objectValue      = PreferencesManager.sharedInstance.shortCutForIdentifier(identifier: ShortCutIdentifier.reply)
         actionShortCut.objectValue     = PreferencesManager.sharedInstance.shortCutForIdentifier(identifier: ShortCutIdentifier.action)
         dismissShortCut.objectValue    = PreferencesManager.sharedInstance.shortCutForIdentifier(identifier: ShortCutIdentifier.dismiss)

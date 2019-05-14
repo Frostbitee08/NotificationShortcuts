@@ -21,31 +21,58 @@ class NotificationHandler: NSObject {
         CGWarpMouseCursorPosition(position)
     }
     
-    private func runAppleScript(source: String) {
+    private func runAppleScript(source: String) -> NSAppleEventDescriptor {
         let script = NSAppleScript(source: source)!
         var error: NSDictionary?
         let output = script.executeAndReturnError(&error)
         print(output.stringValue ?? "")
         print("error: \(error as Any)")
+        return output
+    }
+    
+    private func isNotificationDisplayed() -> Bool {
+        let source = """
+set isNotificationDisplayed to false
+
+tell application "System Events"
+    tell process "Notification Center"
+        set notificationCenterWindows to every window
+        set numberOfWindows to count of notificationCenterWindows
+        
+        if numberOfWindows > 0 then
+            set isNotificationDisplayed to true
+        end if
+    end tell
+end tell
+
+isNotificationDisplayed
+"""
+        return self.runAppleScript(source: source).booleanValue
     }
     
     //MARK: Public Actions
     @objc public func closeNotification() {
-        self.moveMouseToTarget()
-        self.clickDismiss()
-        self.moveMouseToOriginalLocation()
+        if self.isNotificationDisplayed() {
+            self.moveMouseToTarget()
+            self.clickDismiss()
+            self.moveMouseToOriginalLocation()
+        }
     }
     
     @objc public func activateNotification() {
-        self.moveMouseToTarget()
-        self.clickAction()
-        self.moveMouseToOriginalLocation()
+        if self.isNotificationDisplayed() {
+            self.moveMouseToTarget()
+            self.clickAction()
+            self.moveMouseToOriginalLocation()
+        }
     }
     
     @objc public func replyToNotification() {
-        self.moveMouseToTarget()
-        self.clickReply()
-        self.moveMouseToOriginalLocation()
+        if self.isNotificationDisplayed() {
+            self.moveMouseToTarget()
+            self.clickReply()
+            self.moveMouseToOriginalLocation()
+        }
     }
     
     //MARK: Private Actions
