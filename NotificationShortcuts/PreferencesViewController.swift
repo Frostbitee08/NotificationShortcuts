@@ -65,6 +65,9 @@ class PreferencesViewController: NSViewController, SRRecorderControlDelegate {
         
         //Set Individual Properties
         self.title                     = "Notification Shortcuts"
+        replyShortCut.objectValue      = PreferencesManager.sharedInstance.shortCutForIdentifier(identifier: ShortCutIdentifier.reply)
+        actionShortCut.objectValue     = PreferencesManager.sharedInstance.shortCutForIdentifier(identifier: ShortCutIdentifier.action)
+        dismissShortCut.objectValue    = PreferencesManager.sharedInstance.shortCutForIdentifier(identifier: ShortCutIdentifier.dismiss)
         headerField.stringValue        = "Notification Shortcuts"
         headerField.font               = NSFont.systemFont(ofSize: 16, weight: NSFont.Weight.semibold)
         titleField.stringValue         = "Version 1.0 (2.31)"
@@ -128,30 +131,21 @@ class PreferencesViewController: NSViewController, SRRecorderControlDelegate {
     
     //MARK: SRRecorderControl Delegate
     func shortcutRecorder(_ aRecorder: SRRecorderControl!, canRecordShortcut aShortcut: [AnyHashable : Any]!) -> Bool {
-        //        let validator = SRValidator(delegate: nil)
-        //        let keyCode: NSNumber = aShortcut[SRShortcutKeyCode] as? NSNumber ?? NSNumber(integerLiteral: 0)
-        //        let flags: NSNumber = aShortcut[SRShortcutModifierFlagsKey] as? NSNumber ?? NSNumber(integerLiteral: 0)
-        //        var error: NSError? = nil
-        //        var isTaken: Bool = validator?.isKeyCode(keyCode.uint16Value,
-        //                                                 andFlagsTaken: NSEvent.ModifierFlags(rawValue: UInt(flags.uint16Value)),
-        //                                                 error:&error) ?? true
-        
-        //TODO: Validate whether key/combo has been taken
-        let isTaken             = false
-        var identifier: String? = nil
-        var action: Selector?   = nil
+        let isTaken                       = false
+        var action: Selector?             = nil
+        var shortCut: ShortCutIdentifier? = nil
         
         //Set Variables
         if aRecorder == replyShortCut {
-            identifier = "NotificationShortCutsReply"
+            shortCut = ShortCutIdentifier.reply
             action     = #selector(NotificationHandler.replyToNotification)
         }
         else if aRecorder == actionShortCut {
-            identifier = "NotificationShortCutsAction"
+            shortCut = ShortCutIdentifier.action
             action     = #selector(NotificationHandler.activateNotification)
         }
         else if aRecorder == dismissShortCut {
-            identifier = "NotificationShortCutsClose"
+            shortCut   = ShortCutIdentifier.dismiss
             action     = #selector(NotificationHandler.closeNotification)
         }
         
@@ -160,20 +154,31 @@ class PreferencesViewController: NSViewController, SRRecorderControlDelegate {
             let center = PTHotKeyCenter.shared()
             
             //Unregister Existing Key/Pair
-            let oldHotKey = center?.hotKey(withIdentifier: identifier)
+            let oldHotKey = center?.hotKey(withIdentifier: shortCut?.rawValue)
             center?.unregisterHotKey(oldHotKey)
             
             //Register New Key/Pair
-            let newHotKey = PTHotKey.init(identifier: identifier,
+            let newHotKey = PTHotKey.init(identifier: shortCut?.rawValue,
                                           keyCombo: aShortcut,
                                           target: NotificationHandler.sharedInstance,
                                           action: action)
             center?.register(newHotKey)
+            
+            //Save Preference
+            PreferencesManager.sharedInstance.setShortCutForIdentifier(identifier: shortCut!, shortCut: aShortcut)
         }
         else {
             //TODO: Throw Error
         }
         
         return !isTaken
+    }
+    
+    func shortcutRecorderShouldBeginRecording(_ aRecorder: SRRecorderControl!) -> Bool {
+        PTHotKeyCenter.shared()?.pause()
+        return true
+    }
+    func shortcutRecorderDidEndRecording(_ aRecorder: SRRecorderControl!) {
+        PTHotKeyCenter.shared()?.resume()
     }
 }

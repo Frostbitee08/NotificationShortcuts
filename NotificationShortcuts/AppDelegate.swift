@@ -9,6 +9,12 @@
 import Cocoa
 import ShortcutRecorder
 
+enum ShortCutIdentifier: String {
+    case reply   = "NotificationShortCutsReply"
+    case action  = "NotificationShortCutsAction"
+    case dismiss = "NotificationShortCutsClose"
+}
+
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
@@ -17,11 +23,44 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private var menuItemManager: MenuItemManager?
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        //Set Up Our Menu
         self.menuItemManager = MenuItemManager()
         
+        //Set global shortcuts
+        self.activateShortcuts()
+        
+        //Request accessibility access
         let options : NSDictionary = [kAXTrustedCheckOptionPrompt.takeRetainedValue() as NSString: true]
-        let accessibilityEnabled = AXIsProcessTrustedWithOptions(options)
-        print("RDP Accessibility Enabled: ", accessibilityEnabled)
+        AXIsProcessTrustedWithOptions(options)
+    }
+
+    func activateShortcuts() {
+        let center = PTHotKeyCenter.shared()
+        for shortCut in [ShortCutIdentifier.reply, ShortCutIdentifier.action, ShortCutIdentifier.dismiss] {
+            if let keyCombo = PreferencesManager.sharedInstance.shortCutForIdentifier(identifier: shortCut) {
+                //Unregister Existing Key/Pair
+                let oldHotKey = center?.hotKey(withIdentifier: shortCut.rawValue)
+                center?.unregisterHotKey(oldHotKey)
+                
+                //Register New Key/Pair
+                let newHotKey = PTHotKey.init(identifier: shortCut.rawValue,
+                                                keyCombo: keyCombo,
+                                                  target: NotificationHandler.sharedInstance,
+                                                  action: self.actionForIdentifier(identifier: shortCut))
+                center?.register(newHotKey)
+            }
+        }
+    }
+    
+    func actionForIdentifier(identifier: ShortCutIdentifier) -> Selector {
+        switch identifier {
+        case .reply:
+            return #selector(NotificationHandler.replyToNotification)
+        case .action:
+            return #selector(NotificationHandler.activateNotification)
+        case .dismiss:
+            return #selector(NotificationHandler.closeNotification)
+        }
     }
     
     func delayedSendNotification(sender: NSObject) {
