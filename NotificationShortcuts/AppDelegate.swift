@@ -54,9 +54,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let center = PTHotKeyCenter.shared()
         for shortCut in [ShortCutIdentifier.reply, ShortCutIdentifier.action, ShortCutIdentifier.dismiss] {
             if let keyCombo = PreferencesManager.sharedInstance.shortCutForIdentifier(identifier: shortCut) {
+                //TODO: Figure out why this crashes with bad access
                 //Unregister Existing Key/Pair
-                let oldHotKey = center?.hotKey(withIdentifier: shortCut.rawValue)
-                center?.unregisterHotKey(oldHotKey)
+                //let oldHotKey = center?.hotKey(withIdentifier: shortCut.rawValue)
+                //center?.unregisterHotKey(oldHotKey)
                 
                 //Register New Key/Pair
                 let newHotKey = PTHotKey.init(identifier: shortCut.rawValue,

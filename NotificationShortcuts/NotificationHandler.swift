@@ -9,8 +9,6 @@
 import Cocoa
 import Foundation
 
-//TODO: Check for notification before executing anything
-
 class NotificationHandler: NSObject {
     static let sharedInstance = NotificationHandler()
     private var mouseLocation: NSPoint? = nil
@@ -78,7 +76,7 @@ isNotificationDisplayed
     //MARK: Private Actions
     private func moveMouseToTarget() {
         self.mouseLocation = NSEvent.mouseLocation
-        self.moveMouse(position: CGPoint(x: (NSScreen.main?.frame.width ?? 70)-70, y: 60.0))
+        self.moveMouse(position: CGPoint(x: (NSScreen.screens.first?.frame.width ?? 70)-70, y: 60.0))
     }
     
     private func moveMouseToOriginalLocation() {
@@ -113,7 +111,7 @@ tell application "System Events"
     end tell
 end tell
 """
-        self.runAppleScript(source: source)
+        let _ = self.runAppleScript(source: source)
     }
     
     private func clickAction() {
@@ -141,32 +139,13 @@ tell application "System Events"
     end tell
 end tell
 """
-        self.runAppleScript(source: source)
+        let _ = self.runAppleScript(source: source)
     }
     
     private func clickDismiss() {
-        //TODO: Implement dismisal for all notifications
         let source = """
-tell application "System Events"
-    tell process "Notification Center"
-        set theWindows to every window
-        repeat with i from 1 to number of items in theWindows
-            set this_item to item i of theWindows
-            set someViews to buttons of this_item
-            set cnt to count buttons of this_item
-            
-            if cnt > 1 then
-                set action to button 1 of this_item
-                click action
-            end if
-            
-            log "Buttons: "
-            log this_item
-            log someViews
-        end repeat
-    end tell
-end tell
+do shell script "killall NotificationCenter"
 """
-        self.runAppleScript(source: source)
+        let _ = self.runAppleScript(source: source)
     }
 }
