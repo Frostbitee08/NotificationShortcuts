@@ -30,8 +30,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.activateShortcuts()
         
         //Request accessibility access
-        let options : NSDictionary = [kAXTrustedCheckOptionPrompt.takeRetainedValue() as NSString: true]
+        if checkAccessibilityAccess() == false {
+            requestAccessibilityAccess()
+        }
+    }
+    
+    private func requestAccessibilityAccess() {
+        let options: NSDictionary = [kAXTrustedCheckOptionPrompt.takeRetainedValue() as NSString: true]
         AXIsProcessTrustedWithOptions(options)
+    }
+    
+    private func checkAccessibilityAccess() -> Bool{
+        //get the value for accesibility
+        let checkOptPrompt = kAXTrustedCheckOptionPrompt.takeRetainedValue() as NSString
+        //set the options: false means it wont ask anyway
+        let options = [checkOptPrompt: false]
+        //translate into boolean value
+        let accessEnabled = AXIsProcessTrustedWithOptions(options as CFDictionary?)
+        return accessEnabled
     }
 
     func activateShortcuts() {
