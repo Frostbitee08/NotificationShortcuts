@@ -33,6 +33,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if checkAccessibilityAccess() == false {
             requestAccessibilityAccess()
         }
+        
+        //Request script access
+        self.requestScriptAccess()
+    }
+    
+    private func requestScriptAccess() {
+        let source = """
+        tell application "System Events"
+            tell process "Notification Center"
+            end tell
+        end tell
+        """
+        let script = NSAppleScript(source: source)!
+        var error: NSDictionary?
+        let _ = script.executeAndReturnError(&error)
     }
     
     private func requestAccessibilityAccess() {
