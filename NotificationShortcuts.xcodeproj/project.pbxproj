@@ -368,7 +368,7 @@
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 77M726UR7J;
+				DEVELOPMENT_TEAM = 8483RZD2XX;
 				INFOPLIST_FILE = "$(SRCROOT)/NotificationShortcuts/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -390,7 +390,7 @@
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 77M726UR7J;
+				DEVELOPMENT_TEAM = 8483RZD2XX;
 				INFOPLIST_FILE = "$(SRCROOT)/NotificationShortcuts/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

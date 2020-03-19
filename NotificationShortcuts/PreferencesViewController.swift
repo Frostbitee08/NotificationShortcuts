@@ -68,6 +68,7 @@ class PreferencesViewController: NSViewController, SRRecorderControlDelegate {
         replyShortCut.objectValue      = PreferencesManager.sharedInstance.shortCutForIdentifier(identifier: ShortCutIdentifier.reply)
         actionShortCut.objectValue     = PreferencesManager.sharedInstance.shortCutForIdentifier(identifier: ShortCutIdentifier.action)
         dismissShortCut.objectValue    = PreferencesManager.sharedInstance.shortCutForIdentifier(identifier: ShortCutIdentifier.dismiss)
+        imageView.image                = NSImage(named: "AppIcon")
         headerField.stringValue        = "Notification Shortcuts"
         headerField.font               = NSFont.systemFont(ofSize: 16, weight: NSFont.Weight.semibold)
         titleField.stringValue         = "Version 1.0 (2.31)"
@@ -108,7 +109,7 @@ class PreferencesViewController: NSViewController, SRRecorderControlDelegate {
         }
         headerField.snp.makeConstraints { (make) in
             make.centerX.equalTo(self.view)
-            make.top.equalTo(imageView.snp.bottom)
+            make.top.equalTo(imageView.snp.bottom).offset(10)
             make.width.equalTo(self.view).offset(-30)
             make.height.equalTo(25)
         }
