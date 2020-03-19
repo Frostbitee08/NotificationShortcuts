@@ -169,13 +169,14 @@ class PreferencesViewController: NSViewController, RecorderControlDelegate {
                                                 tag: 0)
             
             GlobalShortcutMonitor.shared.removeAllActions(forShortcut: shortcut)
-            GlobalShortcutMonitor.shared.addAction(shortcutAction, forKeyEvent: .down)
+            GlobalShortcutMonitor.shared.addAction(shortcutAction, forKeyEvent: .down) 
             
             //Save Preference
-            PreferencesManager.sharedInstance.setShortCutForIdentifier(identifier: shortCutIdentifier!, shortCut: aShortcut)
+            PreferencesManager.sharedInstance.setShortCutForIdentifier(identifier: identifier, shortCut: aShortcut)
         }
         else {
             //TODO: Throw Error
+            return false
         }
         
         return !isTaken

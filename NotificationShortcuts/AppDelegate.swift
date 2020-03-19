@@ -82,14 +82,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 let shortCutDictionary = PreferencesManager.sharedInstance.shortCutForIdentifier(identifier: shortCutIdentifier),
                 let shortcut = Shortcut(dictionary: shortCutDictionary)
             else {
-                return
+                continue
             }
-            
+
             let shortcutAction = ShortcutAction(shortcut: shortcut,
                                                 target: NotificationHandler.sharedInstance,
                                                 action: actionForIdentifier(identifier: shortCutIdentifier),
                                                 tag: 0)
-            
+
             GlobalShortcutMonitor.shared.removeAllActions(forShortcut: shortcut)
             GlobalShortcutMonitor.shared.addAction(shortcutAction, forKeyEvent: .down)
         }

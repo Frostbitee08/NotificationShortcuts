@@ -7,7 +7,5 @@
 		<string>com.apple.notificationcenter</string>
 		<string>com.apple.systemevents</string>
 	</array>
-	<key>com.apple.security.app-sandbox</key>
-	<true/>
 </dict>
 </plist>
