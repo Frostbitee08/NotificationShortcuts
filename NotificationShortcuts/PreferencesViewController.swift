@@ -10,12 +10,12 @@ import Cocoa
 import SnapKit
 import ShortcutRecorder
 
-class PreferencesViewController: NSViewController, SRRecorderControlDelegate {
+class PreferencesViewController: NSViewController, RecorderControlDelegate {
     static let intrinsicContentSize: NSSize  = NSSize(width: 340, height: 300)
     
-    private let replyShortCut   = SRRecorderControl(frame: .zero)
-    private let actionShortCut  = SRRecorderControl(frame: .zero)
-    private let dismissShortCut = SRRecorderControl(frame: .zero)
+    private let replyShortCut   = RecorderControl(frame: .zero)
+    private let actionShortCut  = RecorderControl(frame: .zero)
+    private let dismissShortCut = RecorderControl(frame: .zero)
     
     override func loadView() {
         self.view = NSView()
@@ -65,9 +65,6 @@ class PreferencesViewController: NSViewController, SRRecorderControlDelegate {
         
         //Set Individual Properties
         self.title                     = "Preferences"
-        replyShortCut.objectValue      = PreferencesManager.sharedInstance.shortCutForIdentifier(identifier: ShortCutIdentifier.reply)
-        actionShortCut.objectValue     = PreferencesManager.sharedInstance.shortCutForIdentifier(identifier: ShortCutIdentifier.action)
-        dismissShortCut.objectValue    = PreferencesManager.sharedInstance.shortCutForIdentifier(identifier: ShortCutIdentifier.dismiss)
         imageView.image                = NSImage(named: "AppIcon")
         headerField.stringValue        = "Notification Shortcuts"
         headerField.font               = NSFont.systemFont(ofSize: 16, weight: NSFont.Weight.semibold)
@@ -80,6 +77,21 @@ class PreferencesViewController: NSViewController, SRRecorderControlDelegate {
         shortCutStackView.orientation  = .vertical
         shortCutStackView.alignment    = .left
         shortCutStackView.spacing      = 10
+        
+        func setShortCutObjectValue(shortCutIdentifier: ShortCutIdentifier, control: RecorderControl) {
+            guard
+                let shortCutDictionary = PreferencesManager.sharedInstance.shortCutForIdentifier(identifier: shortCutIdentifier),
+                let shortCut = Shortcut(dictionary: shortCutDictionary)
+            else {
+                return
+            }
+            
+            control.objectValue = shortCut
+        }
+        
+        setShortCutObjectValue(shortCutIdentifier: .reply, control: replyShortCut)
+        setShortCutObjectValue(shortCutIdentifier: .action, control: actionShortCut)
+        setShortCutObjectValue(shortCutIdentifier: .dismiss, control: dismissShortCut)
         
         //Add Subviews
         replyStackView.addArrangedSubview(replyField)
@@ -131,42 +143,36 @@ class PreferencesViewController: NSViewController, SRRecorderControlDelegate {
     }
     
     //MARK: SRRecorderControl Delegate
-    func shortcutRecorder(_ aRecorder: SRRecorderControl!, canRecordShortcut aShortcut: [AnyHashable : Any]!) -> Bool {
+    func shortcutRecorder(_ aRecorder: RecorderControl, canRecordShortcut aShortcut: [AnyHashable : Any]) -> Bool {
+        guard let shortcut = Shortcut(dictionary: aShortcut) else {
+            return false
+        }
+        
         let isTaken                       = false
-        var action: Selector?             = nil
-        var shortCut: ShortCutIdentifier? = nil
+        var shortCutIdentifier: ShortCutIdentifier? = nil
         
         //Set Variables
         if aRecorder == replyShortCut {
-            shortCut = ShortCutIdentifier.reply
-            action     = #selector(NotificationHandler.replyToNotification)
+            shortCutIdentifier = ShortCutIdentifier.reply
         }
         else if aRecorder == actionShortCut {
-            shortCut = ShortCutIdentifier.action
-            action     = #selector(NotificationHandler.activateNotification)
+            shortCutIdentifier = ShortCutIdentifier.action
         }
         else if aRecorder == dismissShortCut {
-            shortCut   = ShortCutIdentifier.dismiss
-            action     = #selector(NotificationHandler.closeNotification)
+            shortCutIdentifier   = ShortCutIdentifier.dismiss
         }
         
-        if !isTaken {
-            //Declare Variables
-            let center = PTHotKeyCenter.shared()
+        if !isTaken, let identifier = shortCutIdentifier {
+            let shortcutAction = ShortcutAction(shortcut: shortcut,
+                                                target: NotificationHandler.sharedInstance,
+                                                action: actionForIdentifier(identifier: identifier),
+                                                tag: 0)
             
-            //Unregister Existing Key/Pair
-            let oldHotKey = center?.hotKey(withIdentifier: shortCut?.rawValue)
-            center?.unregisterHotKey(oldHotKey)
-            
-            //Register New Key/Pair
-            let newHotKey = PTHotKey.init(identifier: shortCut?.rawValue,
-                                          keyCombo: aShortcut,
-                                          target: NotificationHandler.sharedInstance,
-                                          action: action)
-            center?.register(newHotKey)
+            GlobalShortcutMonitor.shared.removeAllActions(forShortcut: shortcut)
+            GlobalShortcutMonitor.shared.addAction(shortcutAction, forKeyEvent: .down)
             
             //Save Preference
-            PreferencesManager.sharedInstance.setShortCutForIdentifier(identifier: shortCut!, shortCut: aShortcut)
+            PreferencesManager.sharedInstance.setShortCutForIdentifier(identifier: shortCutIdentifier!, shortCut: aShortcut)
         }
         else {
             //TODO: Throw Error
@@ -175,11 +181,11 @@ class PreferencesViewController: NSViewController, SRRecorderControlDelegate {
         return !isTaken
     }
     
-    func shortcutRecorderShouldBeginRecording(_ aRecorder: SRRecorderControl!) -> Bool {
-        PTHotKeyCenter.shared()?.pause()
+    func shortcutRecorderShouldBeginRecording(_ aRecorder: RecorderControl) -> Bool {
+        GlobalShortcutMonitor.shared.pause()
         return true
     }
-    func shortcutRecorderDidEndRecording(_ aRecorder: SRRecorderControl!) {
-        PTHotKeyCenter.shared()?.resume()
+    private func shortcutRecorderDidEndRecording(_ aRecorder: RecorderControl) {
+        GlobalShortcutMonitor.shared.resume()
     }
 }
