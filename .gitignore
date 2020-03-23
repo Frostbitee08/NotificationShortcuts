@@ -210,3 +210,8 @@ Pods
 # pull your cahnges to other's repo"
 #
 #*.xccheckout
+#
+### Carthage
+Carthage
+Cartfile.resolved
+Cartfile.private
