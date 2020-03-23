@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import Sparkle
 import AppMover
 import ShortcutRecorder
 
@@ -24,6 +25,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private var menuItemManager: MenuItemManager?
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        //Configure Sparkle
+        if let urlString = Bundle.main.object(forInfoDictionaryKey: "SUFeedURL") as? String, let url = URL(string: urlString) {
+            SUUpdater.shared()?.feedURL = url
+        }
+        
         //Set Up Our Menu
         self.menuItemManager = MenuItemManager()
         

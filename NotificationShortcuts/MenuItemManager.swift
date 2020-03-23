@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Sparkle
 import Cocoa
 
 class MenuItemManager: NSObject, NSMenuDelegate {
@@ -39,6 +40,10 @@ class MenuItemManager: NSObject, NSMenuDelegate {
         NSApp.activate(ignoringOtherApps: true)
     }
     
+    @objc private func checkForUpdates() {
+        SUUpdater.shared()?.checkForUpdates(self)
+    }
+    
     @objc private func quitApplication() {
         NSApplication.shared.terminate(self)
     }
@@ -49,15 +54,17 @@ class MenuItemManager: NSObject, NSMenuDelegate {
         self.menu.removeAllItems()
         
         //Instantiate Local Varibales
-        let replyItem       = NSMenuItem(title: "Reply Shortcut", action: nil, keyEquivalent: "")
-        let openItem        = NSMenuItem(title: "Open Shortcut", action: nil, keyEquivalent: "")
-        let dismissItem     = NSMenuItem(title: "Dismiss Shortcut", action: nil, keyEquivalent: "")
-        let seperatorItem   = NSMenuItem.separator()
-        let preferencesItem = NSMenuItem(title: "Preferences", action: #selector(self.showPrefrences), keyEquivalent: ",")
-        let quitItem        = NSMenuItem(title: "Quit Notification Shotcuts", action: #selector(self.quitApplication), keyEquivalent: "q")
-        //TODO: Add Check for Update
+        let replyItem           = NSMenuItem(title: "Reply Shortcut", action: nil, keyEquivalent: "")
+        let openItem            = NSMenuItem(title: "Open Shortcut", action: nil, keyEquivalent: "")
+        let dismissItem         = NSMenuItem(title: "Dismiss Shortcut", action: nil, keyEquivalent: "")
+        let seperatorItem1      = NSMenuItem.separator()
+        let checkForUpdatesItem = NSMenuItem(title: "Check for Updates", action: #selector(self.checkForUpdates), keyEquivalent: "")
+        let preferencesItem     = NSMenuItem(title: "Preferences", action: #selector(self.showPrefrences), keyEquivalent: ",")
+        let seperatorItem2      = NSMenuItem.separator()
+        let quitItem            = NSMenuItem(title: "Quit Notification Shotcuts", action: #selector(self.quitApplication), keyEquivalent: "q")
         
         //Set Properties
+        checkForUpdatesItem.target = self
         preferencesItem.target = self
         quitItem.target = self
         
@@ -109,8 +116,10 @@ class MenuItemManager: NSObject, NSMenuDelegate {
         self.menu.addItem(replyItem)
         self.menu.addItem(openItem)
         self.menu.addItem(dismissItem)
-        self.menu.addItem(seperatorItem)
+        self.menu.addItem(seperatorItem1)
+        self.menu.addItem(checkForUpdatesItem)
         self.menu.addItem(preferencesItem)
+        self.menu.addItem(seperatorItem2)
         self.menu.addItem(quitItem)
     }
 }

@@ -20,6 +20,9 @@
 		84730ABE24286A0A002BA475 /* AppMover.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84730ABD24286A0A002BA475 /* AppMover.framework */; };
 		84730ABF24286A0A002BA475 /* AppMover.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 84730ABD24286A0A002BA475 /* AppMover.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		84730AC124286A49002BA475 /* AppMover.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84730AC024286A49002BA475 /* AppMover.framework.dSYM */; };
+		84730AC3242871AB002BA475 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84730AC2242871AB002BA475 /* Sparkle.framework */; };
+		84730AC4242871AB002BA475 /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 84730AC2242871AB002BA475 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		84730AC6242871BB002BA475 /* Sparkle.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84730AC5242871BB002BA475 /* Sparkle.framework.dSYM */; };
 		848E8DC5228A47A5001F1AE2 /* PreferencesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848E8DC4228A47A5001F1AE2 /* PreferencesManager.swift */; };
 		84C478DE22862388006BFD5B /* MenuItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C478DD22862388006BFD5B /* MenuItemManager.swift */; };
 		84C478E0228629F8006BFD5B /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C478DF228629F8006BFD5B /* PreferencesViewController.swift */; };
@@ -37,6 +40,7 @@
 			files = (
 				84730ABF24286A0A002BA475 /* AppMover.framework in Embed Frameworks */,
 				841195A624285C78006BD721 /* ShortcutRecorder.framework in Embed Frameworks */,
+				84730AC4242871AB002BA475 /* Sparkle.framework in Embed Frameworks */,
 				841195A824285C78006BD721 /* SnapKit.framework in Embed Frameworks */,
 				841195AA24285C78006BD721 /* LaunchAtLogin.framework in Embed Frameworks */,
 			);
@@ -49,6 +53,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
+				84730AC6242871BB002BA475 /* Sparkle.framework.dSYM in CopyFiles */,
 				84730AC124286A49002BA475 /* AppMover.framework.dSYM in CopyFiles */,
 				841195B024285CB1006BD721 /* SnapKit.framework.dSYM in CopyFiles */,
 				841195B124285CB1006BD721 /* LaunchAtLogin.framework.dSYM in CopyFiles */,
@@ -67,7 +72,9 @@
 		841195AE24285CB1006BD721 /* LaunchAtLogin.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = LaunchAtLogin.framework.dSYM; sourceTree = "<group>"; };
 		841195AF24285CB1006BD721 /* ShortcutRecorder.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = ShortcutRecorder.framework.dSYM; sourceTree = "<group>"; };
 		84730ABD24286A0A002BA475 /* AppMover.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppMover.framework; path = Carthage/Build/Mac/AppMover.framework; sourceTree = "<group>"; };
-		84730AC024286A49002BA475 /* AppMover.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = AppMover.framework.dSYM; path = Carthage/Build/Mac/AppMover.framework.dSYM; sourceTree = "<group>"; };
+		84730AC024286A49002BA475 /* AppMover.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = AppMover.framework.dSYM; sourceTree = "<group>"; };
+		84730AC2242871AB002BA475 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Carthage/Build/Mac/Sparkle.framework; sourceTree = "<group>"; };
+		84730AC5242871BB002BA475 /* Sparkle.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = Sparkle.framework.dSYM; sourceTree = "<group>"; };
 		848E8DC4228A47A5001F1AE2 /* PreferencesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesManager.swift; sourceTree = "<group>"; };
 		84C478DD22862388006BFD5B /* MenuItemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemManager.swift; sourceTree = "<group>"; };
 		84C478DF228629F8006BFD5B /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
@@ -86,6 +93,7 @@
 			files = (
 				84730ABE24286A0A002BA475 /* AppMover.framework in Frameworks */,
 				841195A524285C78006BD721 /* ShortcutRecorder.framework in Frameworks */,
+				84730AC3242871AB002BA475 /* Sparkle.framework in Frameworks */,
 				841195A724285C78006BD721 /* SnapKit.framework in Frameworks */,
 				841195A924285C78006BD721 /* LaunchAtLogin.framework in Frameworks */,
 			);
@@ -97,6 +105,8 @@
 		840E272A22861E6600B79A19 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				84730AC5242871BB002BA475 /* Sparkle.framework.dSYM */,
+				84730AC024286A49002BA475 /* AppMover.framework.dSYM */,
 				841195AE24285CB1006BD721 /* LaunchAtLogin.framework.dSYM */,
 				841195AF24285CB1006BD721 /* ShortcutRecorder.framework.dSYM */,
 				841195AD24285CB1006BD721 /* SnapKit.framework.dSYM */,
@@ -111,6 +121,7 @@
 		841195A124285C77006BD721 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				84730AC2242871AB002BA475 /* Sparkle.framework */,
 				84730ABD24286A0A002BA475 /* AppMover.framework */,
 				841195A424285C77006BD721 /* LaunchAtLogin.framework */,
 				841195A224285C77006BD721 /* ShortcutRecorder.framework */,
@@ -122,7 +133,6 @@
 		84DC7CE0228529F400E144A2 = {
 			isa = PBXGroup;
 			children = (
-				84730AC024286A49002BA475 /* AppMover.framework.dSYM */,
 				84DC7CEB228529F400E144A2 /* NotificationShortcuts */,
 				84DC7CEA228529F400E144A2 /* Products */,
 				841195A124285C77006BD721 /* Frameworks */,
@@ -384,6 +394,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MARKETING_VERSION = 0.8;
 				PRODUCT_BUNDLE_IDENTIFIER = particleapps.NotificationResponders;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -410,6 +421,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MARKETING_VERSION = 0.8;
 				PRODUCT_BUNDLE_IDENTIFIER = particleapps.NotificationResponders;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = NotificationShortcutsDIA;
