@@ -32,7 +32,7 @@ class PreferencesManager: NSObject {
         let preferencesDirectoryPath = NSString(string: self.preferencesPath).deletingPathExtension
         self.preferences = [
             ShortCutIdentifier.reply.rawValue: "",
-            ShortCutIdentifier.action.rawValue: "",
+            ShortCutIdentifier.open.rawValue: "",
             ShortCutIdentifier.dismiss.rawValue: "",
         ]
         

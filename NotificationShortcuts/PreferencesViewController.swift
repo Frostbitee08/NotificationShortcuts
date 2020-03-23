@@ -14,7 +14,7 @@ class PreferencesViewController: NSViewController, RecorderControlDelegate {
     static let intrinsicContentSize: NSSize  = NSSize(width: 340, height: 300)
     
     private let replyShortCut   = RecorderControl(frame: .zero)
-    private let actionShortCut  = RecorderControl(frame: .zero)
+    private let openShortCut    = RecorderControl(frame: .zero)
     private let dismissShortCut = RecorderControl(frame: .zero)
     
     override func loadView() {
@@ -32,8 +32,8 @@ class PreferencesViewController: NSViewController, RecorderControlDelegate {
         let shortCutStackView = NSStackView(frame: .zero)
         let replyStackView    = NSStackView(frame: .zero)
         let replyField        = NSTextField(frame: .zero)
-        let actionStackView   = NSStackView(frame: .zero)
-        let actionField       = NSTextField(frame: .zero)
+        let openStackView     = NSStackView(frame: .zero)
+        let openField         = NSTextField(frame: .zero)
         let dismissStackView  = NSStackView(frame: .zero)
         let dismissField      = NSTextField(frame: .zero)
 
@@ -46,7 +46,7 @@ class PreferencesViewController: NSViewController, RecorderControlDelegate {
             field.alignment       = .center
             field.backgroundColor = NSColor.clear
         }
-        for field in [replyField, actionField, dismissField] {
+        for field in [replyField, openField, dismissField] {
             field.isBezeled       = false
             field.isEditable      = false
             field.isSelectable    = false
@@ -55,11 +55,11 @@ class PreferencesViewController: NSViewController, RecorderControlDelegate {
             field.font            = NSFont.systemFont(ofSize: 14)
             field.alignment       = .left
         }
-        for stackView in [replyStackView, dismissStackView, actionStackView] {
+        for stackView in [replyStackView, dismissStackView, openStackView] {
             stackView.distribution = .fillEqually
             stackView.orientation  = .horizontal
         }
-        for shortcutControl in [replyShortCut, actionShortCut, dismissShortCut] {
+        for shortcutControl in [replyShortCut, openShortCut, dismissShortCut] {
             shortcutControl.delegate = self
         }
         
@@ -71,7 +71,7 @@ class PreferencesViewController: NSViewController, RecorderControlDelegate {
         titleField.stringValue         = "Version 1.0 (2.31)"
         subtitleField.stringValue      = "Copyright © 2019 Particle Apps. All rights reserved."
         replyField.stringValue         = "Reply Global Shortcut:\t"
-        actionField.stringValue        = "Action Global Shortcut:\t"
+        openField.stringValue        = "Open Global Shortcut:\t"
         dismissField.stringValue       = "Dismiss Global Shortcut:\t"
         shortCutStackView.distribution = .gravityAreas
         shortCutStackView.orientation  = .vertical
@@ -90,18 +90,18 @@ class PreferencesViewController: NSViewController, RecorderControlDelegate {
         }
         
         setShortCutObjectValue(shortCutIdentifier: .reply, control: replyShortCut)
-        setShortCutObjectValue(shortCutIdentifier: .action, control: actionShortCut)
+        setShortCutObjectValue(shortCutIdentifier: .open, control: openShortCut)
         setShortCutObjectValue(shortCutIdentifier: .dismiss, control: dismissShortCut)
         
         //Add Subviews
         replyStackView.addArrangedSubview(replyField)
         replyStackView.addArrangedSubview(replyShortCut)
-        actionStackView.addArrangedSubview(actionField)
-        actionStackView.addArrangedSubview(actionShortCut)
+        openStackView.addArrangedSubview(openField)
+        openStackView.addArrangedSubview(openShortCut)
         dismissStackView.addArrangedSubview(dismissField)
         dismissStackView.addArrangedSubview(dismissShortCut)
         shortCutStackView.addArrangedSubview(replyStackView)
-        shortCutStackView.addArrangedSubview(actionStackView)
+        shortCutStackView.addArrangedSubview(openStackView)
         shortCutStackView.addArrangedSubview(dismissStackView)
         self.view.addSubview(imageView)
         self.view.addSubview(headerField)
@@ -155,8 +155,8 @@ class PreferencesViewController: NSViewController, RecorderControlDelegate {
         if aRecorder == replyShortCut {
             shortCutIdentifier = ShortCutIdentifier.reply
         }
-        else if aRecorder == actionShortCut {
-            shortCutIdentifier = ShortCutIdentifier.action
+        else if aRecorder == openShortCut {
+            shortCutIdentifier = ShortCutIdentifier.open
         }
         else if aRecorder == dismissShortCut {
             shortCutIdentifier   = ShortCutIdentifier.dismiss

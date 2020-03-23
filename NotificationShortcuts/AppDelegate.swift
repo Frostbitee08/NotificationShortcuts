@@ -11,7 +11,7 @@ import ShortcutRecorder
 
 enum ShortCutIdentifier: String {
     case reply   = "NotificationShortCutsReply"
-    case action  = "NotificationShortCutsAction"
+    case open    = "NotificationShortCutsOpen"
     case dismiss = "NotificationShortCutsClose"
 }
 
@@ -19,8 +19,8 @@ func actionForIdentifier(identifier: ShortCutIdentifier) -> Selector {
     switch identifier {
     case .reply:
         return #selector(NotificationHandler.replyToNotification)
-    case .action:
-        return #selector(NotificationHandler.activateNotification)
+    case .open:
+        return #selector(NotificationHandler.openNotification)
     case .dismiss:
         return #selector(NotificationHandler.closeNotification)
     }
@@ -77,7 +77,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func activateShortcuts() {
-        for shortCutIdentifier in [ShortCutIdentifier.reply, ShortCutIdentifier.action, ShortCutIdentifier.dismiss] {
+        for shortCutIdentifier in [ShortCutIdentifier.reply, ShortCutIdentifier.open, ShortCutIdentifier.dismiss] {
             guard
                 let shortCutDictionary = PreferencesManager.sharedInstance.shortCutForIdentifier(identifier: shortCutIdentifier),
                 let shortcut = Shortcut(dictionary: shortCutDictionary)

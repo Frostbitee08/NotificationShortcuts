@@ -50,7 +50,7 @@ class MenuItemManager: NSObject, NSMenuDelegate {
         
         //Instantiate Local Varibales
         let replyItem       = NSMenuItem(title: "Reply Shortcut", action: nil, keyEquivalent: "")
-        let actionItem      = NSMenuItem(title: "Action Shortcut", action: nil, keyEquivalent: "")
+        let openItem        = NSMenuItem(title: "Open Shortcut", action: nil, keyEquivalent: "")
         let dismissItem     = NSMenuItem(title: "Dismiss Shortcut", action: nil, keyEquivalent: "")
         let seperatorItem   = NSMenuItem.separator()
         let preferencesItem = NSMenuItem(title: "Preferences", action: #selector(self.showPrefrences), keyEquivalent: ",")
@@ -76,19 +76,19 @@ class MenuItemManager: NSObject, NSMenuDelegate {
         else {
             replyItem.isEnabled = false
         }
-        if let shortcut = PreferencesManager.sharedInstance.shortCutForIdentifier(identifier: ShortCutIdentifier.action) {
-            actionItem.isEnabled = true
-            actionItem.action = #selector(NotificationHandler.activateNotification)
-            actionItem.target = NotificationHandler.sharedInstance
+        if let shortcut = PreferencesManager.sharedInstance.shortCutForIdentifier(identifier: ShortCutIdentifier.open) {
+            openItem.isEnabled = true
+            openItem.action = #selector(NotificationHandler.openNotification)
+            openItem.target = NotificationHandler.sharedInstance
             if let keyEquivalent = shortcut["characters"] as? String {
-                actionItem.keyEquivalent = keyEquivalent
+                openItem.keyEquivalent = keyEquivalent
             }
             if let flags = shortcut["modifierFlags"] as? String, let flagsInt = UInt(flags) {
-                actionItem.keyEquivalentModifierMask = NSEvent.ModifierFlags(rawValue: flagsInt)
+                openItem.keyEquivalentModifierMask = NSEvent.ModifierFlags(rawValue: flagsInt)
             }
         }
         else {
-            actionItem.isEnabled = false
+            openItem.isEnabled = false
         }
         if let shortcut = PreferencesManager.sharedInstance.shortCutForIdentifier(identifier: ShortCutIdentifier.dismiss) {
             dismissItem.isEnabled = true
@@ -107,7 +107,7 @@ class MenuItemManager: NSObject, NSMenuDelegate {
         
         //Add Items
         self.menu.addItem(replyItem)
-        self.menu.addItem(actionItem)
+        self.menu.addItem(openItem)
         self.menu.addItem(dismissItem)
         self.menu.addItem(seperatorItem)
         self.menu.addItem(preferencesItem)

@@ -51,17 +51,13 @@ isNotificationDisplayed
     //MARK: Public Actions
     @objc public func closeNotification() {
         if self.isNotificationDisplayed() {
-            self.moveMouseToTarget()
             self.clickDismiss()
-            self.moveMouseToOriginalLocation()
         }
     }
     
-    @objc public func activateNotification() {
+    @objc public func openNotification() {
         if self.isNotificationDisplayed() {
-            self.moveMouseToTarget()
-            self.clickAction()
-            self.moveMouseToOriginalLocation()
+            self.openCorrespondingApplication()
         }
     }
     
@@ -86,6 +82,22 @@ isNotificationDisplayed
         }
     }
     
+    private func clickDismiss() {
+        let source = """
+tell application "System Events"
+    tell process "NotificationCenter"
+        set windowCount to count windows
+        repeat with i from windowCount to 1 by -1
+            click button "Close" of window i
+        end repeat
+    end tell
+end tell
+
+do shell script "killall NotificationCenter"
+"""
+        let _ = self.runAppleScript(source: source)
+    }
+    
     private func clickReply() {
         let source = """
 tell application "System Events"
@@ -103,10 +115,6 @@ tell application "System Events"
                 set reply to button 1 of this_item
                 click reply
             end if
-            
-            log "Buttons: "
-            log this_item
-            log someViews
         end repeat
     end tell
 end tell
@@ -114,37 +122,16 @@ end tell
         let _ = self.runAppleScript(source: source)
     }
     
-    private func clickAction() {
+    private func openCorrespondingApplication() {
         let source = """
 tell application "System Events"
     tell process "Notification Center"
         set theWindows to every window
-        repeat with i from 1 to number of items in theWindows
-            set this_item to item i of theWindows
-            set someViews to buttons of this_item
-            set cnt to count buttons of this_item
-            
-            if cnt > 1 then
-                set action to button 2 of this_item
-                click action
-            else if cnt > 0 then
-                set reply to button 1 of this_item
-                click action
-            end if
-            
-            log "Buttons: "
-            log this_item
-            log someViews
-        end repeat
+        set theWindow to item 1 of theWindows
+
+        click theWindow
     end tell
 end tell
-"""
-        let _ = self.runAppleScript(source: source)
-    }
-    
-    private func clickDismiss() {
-        let source = """
-do shell script "killall NotificationCenter"
 """
         let _ = self.runAppleScript(source: source)
     }
