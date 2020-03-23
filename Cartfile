@@ -1,3 +1,4 @@
 github "Kentzo/ShortcutRecorder" ~> 3.1
 github "SnapKit/SnapKit" ~> 5.0.0
+github "Frostbitee08/AppMover"
 github "sindresorhus/LaunchAtLogin"

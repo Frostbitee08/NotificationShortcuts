@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import AppMover
 import ShortcutRecorder
 
 enum ShortCutIdentifier: String {
@@ -29,6 +30,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         //Set global shortcuts
         self.activateShortcuts()
         
+        //Move to Applications Folder if needed
+        //TODO: Add a "Do not shot this message again" option https://github.com/potionfactory/LetsMove
+        AppMover.moveIfNecessary(message: "I can move myself to the Applications folder if you'd like. This will keep your Downloads folder uncluttered.")
+        
         //Request accessibility access
         if checkAccessibilityAccess() == false {
             requestAccessibilityAccess()
@@ -36,10 +41,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         //Request script access
         self.requestScriptAccess()
-        
-        //TODO: Move to Applications Folder if needed
-        
-        //TODO: Prompt for launch at login
     }
     
     //MARK: Helpers
