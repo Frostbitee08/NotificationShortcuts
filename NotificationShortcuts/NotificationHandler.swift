@@ -79,7 +79,11 @@ isNotificationDisplayed
     @objc public func replyToNotification() {
         if self.isNotificationDisplayed() {
             self.moveMouseToTarget()
-            self.clickReply()
+            if #available(macOS 15.0, *) {
+                self.clickReply()
+            } else {
+                self.clickLegacyReply()
+            }
             self.moveMouseToOriginalLocation()
         }
     }
@@ -119,6 +123,27 @@ end tell
     }
     
     private func clickReply() {
+        let source = """
+tell application "System Events"
+    tell process "Notification Center"
+        set theWindows to every window
+        repeat with i from 1 to number of items in theWindows
+            set this_item to item i of theWindows
+            set someViews to buttons of this_item
+            set cnt to count buttons of this_item
+            
+            if cnt > 0 then
+                set reply to button 1 of this_item
+                click reply
+            end if
+        end repeat
+    end tell
+end tell
+"""
+        let _ = self.runAppleScript(source: source)
+    }
+    
+    private func clickLegacyReply() {
         let source = """
 tell application "System Events"
     tell process "Notification Center"
