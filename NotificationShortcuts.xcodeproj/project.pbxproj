@@ -174,6 +174,7 @@
 				TargetAttributes = {
 					84DC7CE8228529F400E144A2 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1130;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
 								enabled = 1;
@@ -375,7 +376,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = particleapps.NotificationResponders;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -402,7 +403,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = particleapps.NotificationResponders;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = NotificationShortcutsDIA;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

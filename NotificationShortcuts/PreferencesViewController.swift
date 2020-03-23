@@ -205,7 +205,8 @@ class PreferencesViewController: NSViewController, RecorderControlDelegate {
         GlobalShortcutMonitor.shared.pause()
         return true
     }
-    private func shortcutRecorderDidEndRecording(_ aRecorder: RecorderControl) {
+    
+    func shortcutRecorderDidEndRecording(_ aRecorder: RecorderControl) {
         GlobalShortcutMonitor.shared.resume()
     }
 }
