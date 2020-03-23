@@ -47,6 +47,8 @@ class PreferencesViewController: NSViewController, RecorderControlDelegate {
                                                          NSAttributedString.Key.paragraphStyle: paragraph])
             return string
         }()
+        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+        let buildVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
 
         //Set Group Properties
         for field in [headerField, titleField, websiteField, subtitleField] {
@@ -85,7 +87,7 @@ class PreferencesViewController: NSViewController, RecorderControlDelegate {
         imageView.image                = NSImage(named: "AppIcon")
         headerField.stringValue        = "Notification Shortcuts"
         headerField.font               = NSFont.systemFont(ofSize: 16, weight: NSFont.Weight.semibold)
-        titleField.stringValue         = "Version 1.0 (2.31)"
+        titleField.stringValue         = String.init(format: "Version %@ (%@)", appVersion ?? "?", buildVersion ?? "?")
         subtitleField.stringValue      = "Copyright © 2019 Particle Apps. All rights reserved."
         replyField.stringValue         = "Reply Global Shortcut:\t"
         openField.stringValue          = "Open Global Shortcut:\t"
