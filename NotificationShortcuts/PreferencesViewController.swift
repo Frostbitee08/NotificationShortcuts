@@ -12,7 +12,7 @@ import LaunchAtLogin
 import ShortcutRecorder
 
 class PreferencesViewController: NSViewController, RecorderControlDelegate {
-    static let intrinsicContentSize: NSSize  = NSSize(width: 340, height: 320)
+    static let intrinsicContentSize: NSSize  = NSSize(width: 340, height: 340)
     
     private let replyShortCut   = RecorderControl(frame: .zero)
     private let openShortCut    = RecorderControl(frame: .zero)
@@ -30,6 +30,7 @@ class PreferencesViewController: NSViewController, RecorderControlDelegate {
         let imageView         = NSImageView(frame: .zero)
         let headerField       = NSTextField(frame: .zero)
         let titleField        = NSTextField(frame: .zero)
+        let websiteField      = NSTextField(frame: .zero)
         let subtitleField     = NSTextField(frame: .zero)
         let shortCutStackView = NSStackView(frame: .zero)
         let replyStackView    = NSStackView(frame: .zero)
@@ -38,9 +39,17 @@ class PreferencesViewController: NSViewController, RecorderControlDelegate {
         let openField         = NSTextField(frame: .zero)
         let dismissStackView  = NSStackView(frame: .zero)
         let dismissField      = NSTextField(frame: .zero)
+        let websiteString: NSAttributedString = {
+            let paragraph = NSMutableParagraphStyle()
+            paragraph.alignment = .center
+            let string = NSAttributedString(string: "https://notificationshortcuts.com",
+                                            attributes: [NSAttributedString.Key.link: "https://notificationshortcuts.com",
+                                                         NSAttributedString.Key.paragraphStyle: paragraph])
+            return string
+        }()
 
         //Set Group Properties
-        for field in [headerField, titleField, subtitleField] {
+        for field in [headerField, titleField, websiteField, subtitleField] {
             field.isBezeled       = false
             field.isEditable      = false
             field.isSelectable    = false
@@ -85,6 +94,9 @@ class PreferencesViewController: NSViewController, RecorderControlDelegate {
         shortCutStackView.orientation  = .vertical
         shortCutStackView.alignment    = .left
         shortCutStackView.spacing      = 10
+        websiteField.attributedStringValue = websiteString
+        websiteField.isSelectable = true
+        websiteField.allowsEditingTextAttributes = true
         
         func setShortCutObjectValue(shortCutIdentifier: ShortCutIdentifier, control: RecorderControl) {
             guard
@@ -114,6 +126,7 @@ class PreferencesViewController: NSViewController, RecorderControlDelegate {
         self.view.addSubview(imageView)
         self.view.addSubview(headerField)
         self.view.addSubview(titleField)
+        self.view.addSubview(websiteField)
         self.view.addSubview(subtitleField)
         self.view.addSubview(startAtLoginButton)
         self.view.addSubview(shortCutStackView)
@@ -140,9 +153,13 @@ class PreferencesViewController: NSViewController, RecorderControlDelegate {
             make.width.equalTo(headerField)
             make.top.equalTo(headerField.snp.bottom)
         }
-        subtitleField.snp.makeConstraints { (make) in
+        websiteField.snp.makeConstraints { (make) in
             make.centerX.width.height.equalTo(titleField)
             make.top.equalTo(titleField.snp.bottom)
+        }
+        subtitleField.snp.makeConstraints { (make) in
+            make.centerX.width.height.equalTo(titleField)
+            make.top.equalTo(websiteField.snp.bottom)
         }
         startAtLoginButton.snp.makeConstraints { (make) in
             make.left.right.equalTo(subtitleField)
