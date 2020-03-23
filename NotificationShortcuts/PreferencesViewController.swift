@@ -8,14 +8,16 @@
 
 import Cocoa
 import SnapKit
+import LaunchAtLogin
 import ShortcutRecorder
 
 class PreferencesViewController: NSViewController, RecorderControlDelegate {
-    static let intrinsicContentSize: NSSize  = NSSize(width: 340, height: 300)
+    static let intrinsicContentSize: NSSize  = NSSize(width: 340, height: 320)
     
     private let replyShortCut   = RecorderControl(frame: .zero)
     private let openShortCut    = RecorderControl(frame: .zero)
     private let dismissShortCut = RecorderControl(frame: .zero)
+    private let startAtLoginButton = NSButton(frame: .zero)
     
     override func loadView() {
         self.view = NSView()
@@ -64,6 +66,12 @@ class PreferencesViewController: NSViewController, RecorderControlDelegate {
         }
         
         //Set Individual Properties
+        startAtLoginButton.setButtonType(NSButton.ButtonType.switch)
+        startAtLoginButton.font        = NSFont.systemFont(ofSize: 14)
+        startAtLoginButton.title       = "Start Notification Shortcuts at Login"
+        startAtLoginButton.target      = self
+        startAtLoginButton.action      = #selector(self.toggleStartAtLogin(sender:))
+        startAtLoginButton.state       = LaunchAtLogin.isEnabled ? NSControl.StateValue.on : NSControl.StateValue.off
         self.title                     = "Preferences"
         imageView.image                = NSImage(named: "AppIcon")
         headerField.stringValue        = "Notification Shortcuts"
@@ -71,7 +79,7 @@ class PreferencesViewController: NSViewController, RecorderControlDelegate {
         titleField.stringValue         = "Version 1.0 (2.31)"
         subtitleField.stringValue      = "Copyright © 2019 Particle Apps. All rights reserved."
         replyField.stringValue         = "Reply Global Shortcut:\t"
-        openField.stringValue        = "Open Global Shortcut:\t"
+        openField.stringValue          = "Open Global Shortcut:\t"
         dismissField.stringValue       = "Dismiss Global Shortcut:\t"
         shortCutStackView.distribution = .gravityAreas
         shortCutStackView.orientation  = .vertical
@@ -107,6 +115,7 @@ class PreferencesViewController: NSViewController, RecorderControlDelegate {
         self.view.addSubview(headerField)
         self.view.addSubview(titleField)
         self.view.addSubview(subtitleField)
+        self.view.addSubview(startAtLoginButton)
         self.view.addSubview(shortCutStackView)
         
         //Set Constrains
@@ -135,12 +144,22 @@ class PreferencesViewController: NSViewController, RecorderControlDelegate {
             make.centerX.width.height.equalTo(titleField)
             make.top.equalTo(titleField.snp.bottom)
         }
-        shortCutStackView.snp.makeConstraints { (make) in
+        startAtLoginButton.snp.makeConstraints { (make) in
             make.left.right.equalTo(subtitleField)
-            make.top.equalTo(subtitleField.snp.bottom).offset(25)
+            make.top.equalTo(subtitleField.snp.bottom).offset(15)
+            make.height.equalTo(25)
+        }
+        shortCutStackView.snp.makeConstraints { (make) in
+            make.left.right.equalTo(startAtLoginButton)
+            make.top.equalTo(startAtLoginButton.snp.bottom).offset(15)
             make.height.equalTo(45*shortCutStackView.arrangedSubviews.count)
         }
     }
+    
+    //MARK: Actions
+     @objc private func toggleStartAtLogin(sender: NSButton) {
+         LaunchAtLogin.isEnabled = !LaunchAtLogin.isEnabled
+     }
     
     //MARK: SRRecorderControl Delegate
     func shortcutRecorder(_ aRecorder: RecorderControl, canRecordShortcut aShortcut: [AnyHashable : Any]) -> Bool {

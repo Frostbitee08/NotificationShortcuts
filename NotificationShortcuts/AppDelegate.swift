@@ -15,17 +15,6 @@ enum ShortCutIdentifier: String {
     case dismiss = "NotificationShortCutsClose"
 }
 
-func actionForIdentifier(identifier: ShortCutIdentifier) -> Selector {
-    switch identifier {
-    case .reply:
-        return #selector(NotificationHandler.replyToNotification)
-    case .open:
-        return #selector(NotificationHandler.openNotification)
-    case .dismiss:
-        return #selector(NotificationHandler.closeNotification)
-    }
-}
-
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
@@ -47,8 +36,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         //Request script access
         self.requestScriptAccess()
+        
+        //TODO: Move to Applications Folder if needed
+        
+        //TODO: Prompt for launch at login
     }
     
+    //MARK: Helpers
+    private func checkAccessibilityAccess() -> Bool{
+        //get the value for accesibility
+        let checkOptPrompt = kAXTrustedCheckOptionPrompt.takeRetainedValue() as NSString
+        //set the options: false means it wont ask anyway
+        let options = [checkOptPrompt: false]
+        //translate into boolean value
+        let accessEnabled = AXIsProcessTrustedWithOptions(options as CFDictionary?)
+        return accessEnabled
+    }
+    
+    //MARK: Actions
     private func requestScriptAccess() {
         let source = """
         tell application "System Events"
@@ -64,16 +69,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private func requestAccessibilityAccess() {
         let options: NSDictionary = [kAXTrustedCheckOptionPrompt.takeRetainedValue() as NSString: true]
         AXIsProcessTrustedWithOptions(options)
-    }
-    
-    private func checkAccessibilityAccess() -> Bool{
-        //get the value for accesibility
-        let checkOptPrompt = kAXTrustedCheckOptionPrompt.takeRetainedValue() as NSString
-        //set the options: false means it wont ask anyway
-        let options = [checkOptPrompt: false]
-        //translate into boolean value
-        let accessEnabled = AXIsProcessTrustedWithOptions(options as CFDictionary?)
-        return accessEnabled
     }
 
     func activateShortcuts() {
@@ -95,6 +90,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
+    //MARK: Debug
     func delayedSendNotification(sender: NSObject) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             self.sendNotification()

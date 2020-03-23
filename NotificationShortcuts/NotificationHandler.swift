@@ -9,6 +9,17 @@
 import Cocoa
 import Foundation
 
+func actionForIdentifier(identifier: ShortCutIdentifier) -> Selector {
+    switch identifier {
+    case .reply:
+        return #selector(NotificationHandler.replyToNotification)
+    case .open:
+        return #selector(NotificationHandler.openNotification)
+    case .dismiss:
+        return #selector(NotificationHandler.closeNotification)
+    }
+}
+
 class NotificationHandler: NSObject {
     static let sharedInstance = NotificationHandler()
     private var mouseLocation: NSPoint? = nil
@@ -52,6 +63,10 @@ isNotificationDisplayed
     @objc public func closeNotification() {
         if self.isNotificationDisplayed() {
             self.clickDismiss()
+            
+            if isNotificationDisplayed() {
+                self.killNotificationCenter()
+            }
         }
     }
     
@@ -82,6 +97,13 @@ isNotificationDisplayed
         }
     }
     
+    private func killNotificationCenter() {
+        let source = """
+do shell script "killall NotificationCenter"
+"""
+        let _ = self.runAppleScript(source: source)
+    }
+    
     private func clickDismiss() {
         let source = """
 tell application "System Events"
@@ -92,8 +114,6 @@ tell application "System Events"
         end repeat
     end tell
 end tell
-
-do shell script "killall NotificationCenter"
 """
         let _ = self.runAppleScript(source: source)
     }

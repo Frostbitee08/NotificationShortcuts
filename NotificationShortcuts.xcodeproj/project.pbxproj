@@ -3,12 +3,20 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		52781F2A1D62BD601CF18322 /* Pods_NotificationShortcuts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 829CA55F385BFD8B3C6EC2DD /* Pods_NotificationShortcuts.framework */; };
 		840E272922861E5F00B79A19 /* NotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840E272822861E5F00B79A19 /* NotificationHandler.swift */; };
+		841195A524285C78006BD721 /* ShortcutRecorder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841195A224285C77006BD721 /* ShortcutRecorder.framework */; };
+		841195A624285C78006BD721 /* ShortcutRecorder.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 841195A224285C77006BD721 /* ShortcutRecorder.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		841195A724285C78006BD721 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841195A324285C77006BD721 /* SnapKit.framework */; };
+		841195A824285C78006BD721 /* SnapKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 841195A324285C77006BD721 /* SnapKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		841195A924285C78006BD721 /* LaunchAtLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841195A424285C77006BD721 /* LaunchAtLogin.framework */; };
+		841195AA24285C78006BD721 /* LaunchAtLogin.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 841195A424285C77006BD721 /* LaunchAtLogin.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		841195B024285CB1006BD721 /* SnapKit.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 841195AD24285CB1006BD721 /* SnapKit.framework.dSYM */; };
+		841195B124285CB1006BD721 /* LaunchAtLogin.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 841195AE24285CB1006BD721 /* LaunchAtLogin.framework.dSYM */; };
+		841195B224285CB1006BD721 /* ShortcutRecorder.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 841195AF24285CB1006BD721 /* ShortcutRecorder.framework.dSYM */; };
 		848E8DC5228A47A5001F1AE2 /* PreferencesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848E8DC4228A47A5001F1AE2 /* PreferencesManager.swift */; };
 		84C478DE22862388006BFD5B /* MenuItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C478DD22862388006BFD5B /* MenuItemManager.swift */; };
 		84C478E0228629F8006BFD5B /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C478DF228629F8006BFD5B /* PreferencesViewController.swift */; };
@@ -17,9 +25,42 @@
 		84DC7CF2228529F600E144A2 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84DC7CF0228529F600E144A2 /* MainMenu.xib */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		841195AB24285C78006BD721 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				841195A624285C78006BD721 /* ShortcutRecorder.framework in Embed Frameworks */,
+				841195A824285C78006BD721 /* SnapKit.framework in Embed Frameworks */,
+				841195AA24285C78006BD721 /* LaunchAtLogin.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		841195AC24285C8A006BD721 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				841195B024285CB1006BD721 /* SnapKit.framework.dSYM in CopyFiles */,
+				841195B124285CB1006BD721 /* LaunchAtLogin.framework.dSYM in CopyFiles */,
+				841195B224285CB1006BD721 /* ShortcutRecorder.framework.dSYM in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		829CA55F385BFD8B3C6EC2DD /* Pods_NotificationShortcuts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NotificationShortcuts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		840E272822861E5F00B79A19 /* NotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHandler.swift; sourceTree = "<group>"; };
+		841195A224285C77006BD721 /* ShortcutRecorder.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ShortcutRecorder.framework; path = Carthage/Build/Mac/ShortcutRecorder.framework; sourceTree = "<group>"; };
+		841195A324285C77006BD721 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/Mac/SnapKit.framework; sourceTree = "<group>"; };
+		841195A424285C77006BD721 /* LaunchAtLogin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LaunchAtLogin.framework; path = Carthage/Build/Mac/LaunchAtLogin.framework; sourceTree = "<group>"; };
+		841195AD24285CB1006BD721 /* SnapKit.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = SnapKit.framework.dSYM; sourceTree = "<group>"; };
+		841195AE24285CB1006BD721 /* LaunchAtLogin.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = LaunchAtLogin.framework.dSYM; sourceTree = "<group>"; };
+		841195AF24285CB1006BD721 /* ShortcutRecorder.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = ShortcutRecorder.framework.dSYM; sourceTree = "<group>"; };
 		848E8DC4228A47A5001F1AE2 /* PreferencesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesManager.swift; sourceTree = "<group>"; };
 		84C478DD22862388006BFD5B /* MenuItemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemManager.swift; sourceTree = "<group>"; };
 		84C478DF228629F8006BFD5B /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
@@ -29,8 +70,6 @@
 		84DC7CF1228529F600E144A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		84DC7CF3228529F600E144A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84DC7CF4228529F600E144A2 /* NotificationShortcuts.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NotificationShortcuts.entitlements; sourceTree = "<group>"; };
-		9D8D77316C1E6582676931E1 /* Pods-NotificationShortcuts.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationShortcuts.release.xcconfig"; path = "Pods/Target Support Files/Pods-NotificationShortcuts/Pods-NotificationShortcuts.release.xcconfig"; sourceTree = "<group>"; };
-		BAA3C4B73D188CB36ADFCC0D /* Pods-NotificationShortcuts.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationShortcuts.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NotificationShortcuts/Pods-NotificationShortcuts.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,33 +77,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52781F2A1D62BD601CF18322 /* Pods_NotificationShortcuts.framework in Frameworks */,
+				841195A524285C78006BD721 /* ShortcutRecorder.framework in Frameworks */,
+				841195A724285C78006BD721 /* SnapKit.framework in Frameworks */,
+				841195A924285C78006BD721 /* LaunchAtLogin.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		12C83D49EC6B4868F65AC94D /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				829CA55F385BFD8B3C6EC2DD /* Pods_NotificationShortcuts.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		71665E87BCEC715015C96E2A /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				BAA3C4B73D188CB36ADFCC0D /* Pods-NotificationShortcuts.debug.xcconfig */,
-				9D8D77316C1E6582676931E1 /* Pods-NotificationShortcuts.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		840E272A22861E6600B79A19 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				841195AE24285CB1006BD721 /* LaunchAtLogin.framework.dSYM */,
+				841195AF24285CB1006BD721 /* ShortcutRecorder.framework.dSYM */,
+				841195AD24285CB1006BD721 /* SnapKit.framework.dSYM */,
 				84DC7CF0228529F600E144A2 /* MainMenu.xib */,
 				84DC7CEE228529F600E144A2 /* Assets.xcassets */,
 				84DC7CF3228529F600E144A2 /* Info.plist */,
@@ -73,13 +100,22 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		841195A124285C77006BD721 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				841195A424285C77006BD721 /* LaunchAtLogin.framework */,
+				841195A224285C77006BD721 /* ShortcutRecorder.framework */,
+				841195A324285C77006BD721 /* SnapKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		84DC7CE0228529F400E144A2 = {
 			isa = PBXGroup;
 			children = (
 				84DC7CEB228529F400E144A2 /* NotificationShortcuts */,
 				84DC7CEA228529F400E144A2 /* Products */,
-				71665E87BCEC715015C96E2A /* Pods */,
-				12C83D49EC6B4868F65AC94D /* Frameworks */,
+				841195A124285C77006BD721 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -111,11 +147,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84DC7CF7228529F600E144A2 /* Build configuration list for PBXNativeTarget "NotificationShortcuts" */;
 			buildPhases = (
-				76FA36430B6AC29134204007 /* [CP] Check Pods Manifest.lock */,
 				84DC7CE5228529F400E144A2 /* Sources */,
 				84DC7CE6228529F400E144A2 /* Frameworks */,
 				84DC7CE7228529F400E144A2 /* Resources */,
-				14E2674F1AD6049777195E05 /* [CP] Embed Pods Frameworks */,
+				841195AB24285C78006BD721 /* Embed Frameworks */,
+				841195AC24285C8A006BD721 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -175,44 +211,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		14E2674F1AD6049777195E05 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-NotificationShortcuts/Pods-NotificationShortcuts-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-NotificationShortcuts/Pods-NotificationShortcuts-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NotificationShortcuts/Pods-NotificationShortcuts-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		76FA36430B6AC29134204007 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-NotificationShortcuts-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		84DC7CE5228529F400E144A2 /* Sources */ = {
@@ -358,7 +356,6 @@
 		};
 		84DC7CF8228529F600E144A2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BAA3C4B73D188CB36ADFCC0D /* Pods-NotificationShortcuts.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "NotificationShortcuts/Supporting Files/NotificationShortcuts.entitlements";
@@ -366,12 +363,16 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 8483RZD2XX;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/NotificationShortcuts/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = particleapps.NotificationResponders;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -380,7 +381,6 @@
 		};
 		84DC7CF9228529F600E144A2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9D8D77316C1E6582676931E1 /* Pods-NotificationShortcuts.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "NotificationShortcuts/Supporting Files/NotificationShortcuts.entitlements";
@@ -389,12 +389,16 @@
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 8483RZD2XX;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/NotificationShortcuts/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = particleapps.NotificationResponders;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = NotificationShortcutsDIA;
