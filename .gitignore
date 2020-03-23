@@ -215,3 +215,6 @@ Pods
 Carthage
 Cartfile.resolved
 Cartfile.private
+#
+### Ruby
+.ruby-version
