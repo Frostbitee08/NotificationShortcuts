@@ -34,7 +34,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.menuItemManager = MenuItemManager()
         
         //Set global shortcuts
-        self.activateShortcuts()
+        let userHasShortcuts = self.activateShortcuts()
         
         //Move to Applications Folder if needed
         //TODO: Add a "Do not shot this message again" option https://github.com/potionfactory/LetsMove
@@ -47,6 +47,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         //Request script access
         self.requestScriptAccess()
+        
+        //Prompt user to set shortcuts if needed
+        if !userHasShortcuts {
+            self.menuItemManager?.showPrefrences()
+        }
     }
     
     //MARK: Helpers
@@ -78,7 +83,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         AXIsProcessTrustedWithOptions(options)
     }
 
-    func activateShortcuts() {
+    func activateShortcuts() -> Bool {
+        var activatedAtLeastOneShortcut = false
         for shortCutIdentifier in [ShortCutIdentifier.reply, ShortCutIdentifier.open, ShortCutIdentifier.dismiss] {
             guard
                 let shortCutDictionary = PreferencesManager.sharedInstance.shortCutForIdentifier(identifier: shortCutIdentifier),
@@ -94,7 +100,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
             GlobalShortcutMonitor.shared.removeAllActions(forShortcut: shortcut)
             GlobalShortcutMonitor.shared.addAction(shortcutAction, forKeyEvent: .down)
+            
+            activatedAtLeastOneShortcut = true
         }
+        
+        return activatedAtLeastOneShortcut
     }
     
     //MARK: Debug

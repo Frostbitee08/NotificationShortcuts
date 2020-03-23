@@ -27,7 +27,7 @@ class MenuItemManager: NSObject, NSMenuDelegate {
     }
     
     //MARK: Actions
-    @objc private func showPrefrences() {
+    @objc public func showPrefrences() {
         //Instantiate Window
         self.window = NSWindow.init(contentViewController: self.preferencesViewController)
         self.window?.maxSize = PreferencesViewController.intrinsicContentSize
@@ -40,11 +40,11 @@ class MenuItemManager: NSObject, NSMenuDelegate {
         NSApp.activate(ignoringOtherApps: true)
     }
     
-    @objc private func checkForUpdates() {
+    @objc public func checkForUpdates() {
         SUUpdater.shared()?.checkForUpdates(self)
     }
     
-    @objc private func quitApplication() {
+    @objc public func quitApplication() {
         NSApplication.shared.terminate(self)
     }
     
@@ -68,7 +68,6 @@ class MenuItemManager: NSObject, NSMenuDelegate {
         preferencesItem.target = self
         quitItem.target = self
         
-        //TODO: Get All Modifier Flags working
         if let shortcut = PreferencesManager.sharedInstance.shortCutForIdentifier(identifier: ShortCutIdentifier.reply) {
             replyItem.isEnabled = true
             replyItem.action = #selector(NotificationHandler.replyToNotification)
