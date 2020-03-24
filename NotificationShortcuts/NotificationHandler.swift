@@ -79,10 +79,10 @@ isNotificationDisplayed
     @objc public func replyToNotification() {
         if self.isNotificationDisplayed() {
             self.moveMouseToTarget()
-            if #available(macOS 15.0, *) {
-                self.clickReply()
-            } else {
+            if ProcessInfo.processInfo.operatingSystemVersion.minorVersion < 15 {
                 self.clickLegacyReply()
+            } else {
+                self.clickReply()
             }
             self.moveMouseToOriginalLocation()
         }
