@@ -8,22 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		840E272922861E5F00B79A19 /* NotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840E272822861E5F00B79A19 /* NotificationHandler.swift */; };
-		841195A524285C78006BD721 /* ShortcutRecorder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841195A224285C77006BD721 /* ShortcutRecorder.framework */; };
-		841195A624285C78006BD721 /* ShortcutRecorder.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 841195A224285C77006BD721 /* ShortcutRecorder.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		841195A724285C78006BD721 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841195A324285C77006BD721 /* SnapKit.framework */; };
-		841195A824285C78006BD721 /* SnapKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 841195A324285C77006BD721 /* SnapKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		841195B024285CB1006BD721 /* SnapKit.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 841195AD24285CB1006BD721 /* SnapKit.framework.dSYM */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		841195B224285CB1006BD721 /* ShortcutRecorder.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 841195AF24285CB1006BD721 /* ShortcutRecorder.framework.dSYM */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		843A7BC2242B0AE800185D05 /* LaunchAtLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841195A424285C77006BD721 /* LaunchAtLogin.framework */; };
-		843A7BC3242B0AE800185D05 /* LaunchAtLogin.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 841195A424285C77006BD721 /* LaunchAtLogin.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		843A7BC4242B0AE800185D05 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84730AC2242871AB002BA475 /* Sparkle.framework */; };
-		843A7BC5242B0AE800185D05 /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 84730AC2242871AB002BA475 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		843A7BC8242B0B0600185D05 /* Sparkle.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 843A7BC6242B0B0600185D05 /* Sparkle.framework.dSYM */; };
-		843A7BC9242B0B0600185D05 /* LaunchAtLogin.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 843A7BC7242B0B0600185D05 /* LaunchAtLogin.framework.dSYM */; };
-		84730ABE24286A0A002BA475 /* AppMover.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84730ABD24286A0A002BA475 /* AppMover.framework */; };
-		84730ABF24286A0A002BA475 /* AppMover.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 84730ABD24286A0A002BA475 /* AppMover.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		84730AC124286A49002BA475 /* AppMover.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84730AC024286A49002BA475 /* AppMover.framework.dSYM */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		848E8DC5228A47A5001F1AE2 /* PreferencesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848E8DC4228A47A5001F1AE2 /* PreferencesManager.swift */; };
+		8499CE56242C246A00A6D4AC /* AppMover.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84730ABD24286A0A002BA475 /* AppMover.framework */; };
+		8499CE57242C246A00A6D4AC /* AppMover.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 84730ABD24286A0A002BA475 /* AppMover.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8499CE58242C246B00A6D4AC /* LaunchAtLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841195A424285C77006BD721 /* LaunchAtLogin.framework */; };
+		8499CE59242C246B00A6D4AC /* LaunchAtLogin.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 841195A424285C77006BD721 /* LaunchAtLogin.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8499CE5A242C246B00A6D4AC /* ShortcutRecorder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841195A224285C77006BD721 /* ShortcutRecorder.framework */; };
+		8499CE5B242C246B00A6D4AC /* ShortcutRecorder.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 841195A224285C77006BD721 /* ShortcutRecorder.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8499CE5C242C246B00A6D4AC /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841195A324285C77006BD721 /* SnapKit.framework */; };
+		8499CE5D242C246B00A6D4AC /* SnapKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 841195A324285C77006BD721 /* SnapKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8499CE5E242C246B00A6D4AC /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84730AC2242871AB002BA475 /* Sparkle.framework */; };
+		8499CE5F242C246B00A6D4AC /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 84730AC2242871AB002BA475 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8499CE66242C247900A6D4AC /* LaunchAtLogin.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 8499CE61242C247900A6D4AC /* LaunchAtLogin.framework.dSYM */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		8499CE67242C247900A6D4AC /* ShortcutRecorder.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 8499CE62242C247900A6D4AC /* ShortcutRecorder.framework.dSYM */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		8499CE68242C247900A6D4AC /* SnapKit.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 8499CE63242C247900A6D4AC /* SnapKit.framework.dSYM */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		8499CE69242C247900A6D4AC /* AppMover.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 8499CE64242C247900A6D4AC /* AppMover.framework.dSYM */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		8499CE6A242C247900A6D4AC /* Sparkle.framework.dSYM in Copy Files */ = {isa = PBXBuildFile; fileRef = 8499CE65242C247900A6D4AC /* Sparkle.framework.dSYM */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		84C478DE22862388006BFD5B /* MenuItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C478DD22862388006BFD5B /* MenuItemManager.swift */; };
 		84C478E0228629F8006BFD5B /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C478DF228629F8006BFD5B /* PreferencesViewController.swift */; };
 		84DC7CED228529F400E144A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DC7CEC228529F400E144A2 /* AppDelegate.swift */; };
@@ -32,34 +32,35 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		841195AB24285C78006BD721 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 8;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				843A7BC3242B0AE800185D05 /* LaunchAtLogin.framework in Embed Frameworks */,
-				84730ABF24286A0A002BA475 /* AppMover.framework in Embed Frameworks */,
-				843A7BC5242B0AE800185D05 /* Sparkle.framework in Embed Frameworks */,
-				841195A624285C78006BD721 /* ShortcutRecorder.framework in Embed Frameworks */,
-				841195A824285C78006BD721 /* SnapKit.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 1;
-		};
-		841195AC24285C8A006BD721 /* CopyFiles */ = {
+		841195AC24285C8A006BD721 /* Copy Files */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 8;
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
-				843A7BC8242B0B0600185D05 /* Sparkle.framework.dSYM in CopyFiles */,
-				843A7BC9242B0B0600185D05 /* LaunchAtLogin.framework.dSYM in CopyFiles */,
-				84730AC124286A49002BA475 /* AppMover.framework.dSYM in CopyFiles */,
-				841195B024285CB1006BD721 /* SnapKit.framework.dSYM in CopyFiles */,
-				841195B224285CB1006BD721 /* ShortcutRecorder.framework.dSYM in CopyFiles */,
+				8499CE66242C247900A6D4AC /* LaunchAtLogin.framework.dSYM in Copy Files */,
+				8499CE67242C247900A6D4AC /* ShortcutRecorder.framework.dSYM in Copy Files */,
+				8499CE68242C247900A6D4AC /* SnapKit.framework.dSYM in Copy Files */,
+				8499CE69242C247900A6D4AC /* AppMover.framework.dSYM in Copy Files */,
+				8499CE6A242C247900A6D4AC /* Sparkle.framework.dSYM in Copy Files */,
 			);
+			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 1;
+		};
+		8499CE60242C246B00A6D4AC /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8499CE5B242C246B00A6D4AC /* ShortcutRecorder.framework in Embed Frameworks */,
+				8499CE59242C246B00A6D4AC /* LaunchAtLogin.framework in Embed Frameworks */,
+				8499CE5F242C246B00A6D4AC /* Sparkle.framework in Embed Frameworks */,
+				8499CE57242C246A00A6D4AC /* AppMover.framework in Embed Frameworks */,
+				8499CE5D242C246B00A6D4AC /* SnapKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -68,16 +69,19 @@
 		841195A224285C77006BD721 /* ShortcutRecorder.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ShortcutRecorder.framework; path = Carthage/Build/Mac/ShortcutRecorder.framework; sourceTree = "<group>"; };
 		841195A324285C77006BD721 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/Mac/SnapKit.framework; sourceTree = "<group>"; };
 		841195A424285C77006BD721 /* LaunchAtLogin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LaunchAtLogin.framework; path = Carthage/Build/Mac/LaunchAtLogin.framework; sourceTree = "<group>"; };
-		841195AD24285CB1006BD721 /* SnapKit.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = SnapKit.framework.dSYM; sourceTree = "<group>"; };
-		841195AE24285CB1006BD721 /* LaunchAtLogin.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = LaunchAtLogin.framework.dSYM; sourceTree = "<group>"; };
-		841195AF24285CB1006BD721 /* ShortcutRecorder.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = ShortcutRecorder.framework.dSYM; sourceTree = "<group>"; };
-		843A7BC6242B0B0600185D05 /* Sparkle.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Sparkle.framework.dSYM; path = ../../Carthage/Build/Mac/Sparkle.framework.dSYM; sourceTree = "<group>"; };
-		843A7BC7242B0B0600185D05 /* LaunchAtLogin.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = LaunchAtLogin.framework.dSYM; path = ../../Carthage/Build/Mac/LaunchAtLogin.framework.dSYM; sourceTree = "<group>"; };
 		84730ABD24286A0A002BA475 /* AppMover.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppMover.framework; path = Carthage/Build/Mac/AppMover.framework; sourceTree = "<group>"; };
-		84730AC024286A49002BA475 /* AppMover.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = AppMover.framework.dSYM; sourceTree = "<group>"; };
 		84730AC2242871AB002BA475 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Carthage/Build/Mac/Sparkle.framework; sourceTree = "<group>"; };
-		84730AC5242871BB002BA475 /* Sparkle.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = Sparkle.framework.dSYM; sourceTree = "<group>"; };
 		848E8DC4228A47A5001F1AE2 /* PreferencesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesManager.swift; sourceTree = "<group>"; };
+		8499CE4C242C216100A6D4AC /* SnapKit.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SnapKit.framework.dSYM; path = Carthage/Build/Mac/SnapKit.framework.dSYM; sourceTree = "<group>"; };
+		8499CE4D242C216100A6D4AC /* Sparkle.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Sparkle.framework.dSYM; path = Carthage/Build/Mac/Sparkle.framework.dSYM; sourceTree = "<group>"; };
+		8499CE4E242C216100A6D4AC /* ShortcutRecorder.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = ShortcutRecorder.framework.dSYM; path = Carthage/Build/Mac/ShortcutRecorder.framework.dSYM; sourceTree = "<group>"; };
+		8499CE4F242C216100A6D4AC /* AppMover.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = AppMover.framework.dSYM; path = Carthage/Build/Mac/AppMover.framework.dSYM; sourceTree = "<group>"; };
+		8499CE50242C216100A6D4AC /* LaunchAtLogin.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = LaunchAtLogin.framework.dSYM; path = Carthage/Build/Mac/LaunchAtLogin.framework.dSYM; sourceTree = "<group>"; };
+		8499CE61242C247900A6D4AC /* LaunchAtLogin.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = LaunchAtLogin.framework.dSYM; path = Carthage/Build/Mac/LaunchAtLogin.framework.dSYM; sourceTree = "<group>"; };
+		8499CE62242C247900A6D4AC /* ShortcutRecorder.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = ShortcutRecorder.framework.dSYM; path = Carthage/Build/Mac/ShortcutRecorder.framework.dSYM; sourceTree = "<group>"; };
+		8499CE63242C247900A6D4AC /* SnapKit.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SnapKit.framework.dSYM; path = Carthage/Build/Mac/SnapKit.framework.dSYM; sourceTree = "<group>"; };
+		8499CE64242C247900A6D4AC /* AppMover.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = AppMover.framework.dSYM; path = Carthage/Build/Mac/AppMover.framework.dSYM; sourceTree = "<group>"; };
+		8499CE65242C247900A6D4AC /* Sparkle.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Sparkle.framework.dSYM; path = Carthage/Build/Mac/Sparkle.framework.dSYM; sourceTree = "<group>"; };
 		84C478DD22862388006BFD5B /* MenuItemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemManager.swift; sourceTree = "<group>"; };
 		84C478DF228629F8006BFD5B /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		84DC7CE9228529F400E144A2 /* NotificationShortcuts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NotificationShortcuts.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -93,11 +97,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				843A7BC2242B0AE800185D05 /* LaunchAtLogin.framework in Frameworks */,
-				84730ABE24286A0A002BA475 /* AppMover.framework in Frameworks */,
-				843A7BC4242B0AE800185D05 /* Sparkle.framework in Frameworks */,
-				841195A524285C78006BD721 /* ShortcutRecorder.framework in Frameworks */,
-				841195A724285C78006BD721 /* SnapKit.framework in Frameworks */,
+				8499CE5A242C246B00A6D4AC /* ShortcutRecorder.framework in Frameworks */,
+				8499CE58242C246B00A6D4AC /* LaunchAtLogin.framework in Frameworks */,
+				8499CE5E242C246B00A6D4AC /* Sparkle.framework in Frameworks */,
+				8499CE56242C246A00A6D4AC /* AppMover.framework in Frameworks */,
+				8499CE5C242C246B00A6D4AC /* SnapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,13 +111,6 @@
 		840E272A22861E6600B79A19 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				84730AC5242871BB002BA475 /* Sparkle.framework.dSYM */,
-				843A7BC7242B0B0600185D05 /* LaunchAtLogin.framework.dSYM */,
-				843A7BC6242B0B0600185D05 /* Sparkle.framework.dSYM */,
-				84730AC024286A49002BA475 /* AppMover.framework.dSYM */,
-				841195AE24285CB1006BD721 /* LaunchAtLogin.framework.dSYM */,
-				841195AF24285CB1006BD721 /* ShortcutRecorder.framework.dSYM */,
-				841195AD24285CB1006BD721 /* SnapKit.framework.dSYM */,
 				84DC7CF0228529F600E144A2 /* MainMenu.xib */,
 				84DC7CEE228529F600E144A2 /* Assets.xcassets */,
 				84DC7CF3228529F600E144A2 /* Info.plist */,
@@ -137,6 +134,16 @@
 		84DC7CE0228529F400E144A2 = {
 			isa = PBXGroup;
 			children = (
+				8499CE4F242C216100A6D4AC /* AppMover.framework.dSYM */,
+				8499CE64242C247900A6D4AC /* AppMover.framework.dSYM */,
+				8499CE50242C216100A6D4AC /* LaunchAtLogin.framework.dSYM */,
+				8499CE4E242C216100A6D4AC /* ShortcutRecorder.framework.dSYM */,
+				8499CE4C242C216100A6D4AC /* SnapKit.framework.dSYM */,
+				8499CE4D242C216100A6D4AC /* Sparkle.framework.dSYM */,
+				8499CE61242C247900A6D4AC /* LaunchAtLogin.framework.dSYM */,
+				8499CE62242C247900A6D4AC /* ShortcutRecorder.framework.dSYM */,
+				8499CE63242C247900A6D4AC /* SnapKit.framework.dSYM */,
+				8499CE65242C247900A6D4AC /* Sparkle.framework.dSYM */,
 				84DC7CEB228529F400E144A2 /* NotificationShortcuts */,
 				84DC7CEA228529F400E144A2 /* Products */,
 				841195A124285C77006BD721 /* Frameworks */,
@@ -174,8 +181,9 @@
 				84DC7CE5228529F400E144A2 /* Sources */,
 				84DC7CE6228529F400E144A2 /* Frameworks */,
 				84DC7CE7228529F400E144A2 /* Resources */,
-				841195AB24285C78006BD721 /* Embed Frameworks */,
-				841195AC24285C8A006BD721 /* CopyFiles */,
+				841195AC24285C8A006BD721 /* Copy Files */,
+				8499CE60242C246B00A6D4AC /* Embed Frameworks */,
+				8499CE6B242C333C00A6D4AC /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -236,6 +244,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8499CE6B242C333C00A6D4AC /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "LOCATION=\"${BUILT_PRODUCTS_DIR}\"/\"${FRAMEWORKS_FOLDER_PATH}\"\nIDENTITY=${EXPANDED_CODE_SIGN_IDENTITY_NAME}\n\ncodesign --verbose --force --deep -o runtime --sign \"$IDENTITY\" \"$LOCATION/Sparkle.framework/Versions/A/Resources/AutoUpdate.app\"\ncodesign --verbose --force -o runtime --sign \"$IDENTITY\" \"$LOCATION/Sparkle.framework/Versions/A\"\n\ncodesign --verbose --force --deep -o runtime --sign \"$IDENTITY\" \"$LOCATION/LaunchAtLogin.framework/Versions/A/Resources/LaunchAtLoginHelper.app\"\ncodesign --verbose --force -o runtime --sign \"$IDENTITY\" \"$LOCATION/LaunchAtLogin.framework/Versions/A\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		84DC7CE5228529F400E144A2 /* Sources */ = {
@@ -398,7 +426,8 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 0.9.4;
+				MARKETING_VERSION = 0.9.5;
+				OTHER_CODE_SIGN_FLAGS = "--timestamp --options=runtime";
 				PRODUCT_BUNDLE_IDENTIFIER = particleapps.NotificationResponders;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -425,8 +454,8 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 0.9.4;
-				"OTHER_CODE_SIGN_FLAGS[sdk=*]" = "--timestamp --options=runtime";
+				MARKETING_VERSION = 0.9.5;
+				OTHER_CODE_SIGN_FLAGS = "--timestamp --options=runtime";
 				PRODUCT_BUNDLE_IDENTIFIER = particleapps.NotificationResponders;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = NotificationShortcutsDIA;
