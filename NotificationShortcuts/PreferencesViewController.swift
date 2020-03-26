@@ -180,27 +180,45 @@ class PreferencesViewController: NSViewController, RecorderControlDelegate {
          LaunchAtLogin.isEnabled = !LaunchAtLogin.isEnabled
      }
     
+    //MARK: Helpers
+    private func shortCutIdentifier(for recorder: RecorderControl) -> ShortCutIdentifier? {
+        if recorder == replyShortCut {
+            return ShortCutIdentifier.reply
+        }
+        else if recorder == openShortCut {
+            return ShortCutIdentifier.open
+        }
+        else if recorder == dismissShortCut {
+            return ShortCutIdentifier.dismiss
+        }
+        return nil
+    }
+    
     //MARK: SRRecorderControl Delegate
+    func recorderControlDidEndRecording(_ aControl: RecorderControl) {
+        guard
+            aControl.objectValue == nil,
+            let identifier = self.shortCutIdentifier(for: aControl),
+            let shortcutRaw = PreferencesManager.sharedInstance.shortCutForIdentifier(identifier: identifier),
+            let shortcut = Shortcut(dictionary: shortcutRaw)
+        else {
+            return
+        }
+        
+        //Remove shortcut
+        GlobalShortcutMonitor.shared.removeAllActions(forShortcut: shortcut)
+        PreferencesManager.sharedInstance.setShortCutForIdentifier(identifier: identifier,
+                                                                   shortCut: [AnyHashable : Any]())
+    }
+    
     func shortcutRecorder(_ aRecorder: RecorderControl, canRecordShortcut aShortcut: [AnyHashable : Any]) -> Bool {
         guard let shortcut = Shortcut(dictionary: aShortcut) else {
             return false
         }
         
         let isTaken                       = false
-        var shortCutIdentifier: ShortCutIdentifier? = nil
         
-        //Set Variables
-        if aRecorder == replyShortCut {
-            shortCutIdentifier = ShortCutIdentifier.reply
-        }
-        else if aRecorder == openShortCut {
-            shortCutIdentifier = ShortCutIdentifier.open
-        }
-        else if aRecorder == dismissShortCut {
-            shortCutIdentifier   = ShortCutIdentifier.dismiss
-        }
-        
-        if !isTaken, let identifier = shortCutIdentifier {
+        if !isTaken, let identifier = self.shortCutIdentifier(for: aRecorder) {
             let shortcutAction = ShortcutAction(shortcut: shortcut,
                                                 target: NotificationHandler.sharedInstance,
                                                 action: actionForIdentifier(identifier: identifier),
