@@ -12,7 +12,6 @@ import Cocoa
 
 class MenuItemManager: NSObject, NSMenuDelegate {
     private let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-    private let preferencesViewController = PreferencesViewController()
     private let menu = NSMenu(title: "menu")
     private var window: NSWindow? = nil
     
@@ -24,14 +23,33 @@ class MenuItemManager: NSObject, NSMenuDelegate {
         self.statusItem.menu          = self.menu
         self.statusItem.isEnabled     = true
         self.statusItem.highlightMode = true
+        
+        self.reloadItemValues()
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(reloadItemValues),
+                                               name: PreferencesManager.shortcutsUpdatedNotification.name,
+                                               object: nil)
     }
     
     //MARK: Actions
     @objc public func showPrefrences() {
         //Instantiate Window
-        self.window = NSWindow.init(contentViewController: self.preferencesViewController)
+        self.window = NSWindow.init(contentViewController: PreferencesViewController())
         self.window?.maxSize = PreferencesViewController.intrinsicContentSize
         self.window?.minSize = PreferencesViewController.intrinsicContentSize
+        
+        //Display Window
+        self.window?.makeKeyAndOrderFront(NSApplication.shared.delegate)
+        let windowController = NSWindowController(window: self.window)
+        windowController.showWindow(NSApplication.shared.delegate)
+        NSApp.activate(ignoringOtherApps: true)
+    }
+    
+    @objc public func showSetup() {
+        //Instantiate Window
+        self.window = NSWindow.init(contentViewController: SetupViewController())
+        self.window?.maxSize = SetupViewController.intrinsicContentSize
+        self.window?.minSize = SetupViewController.intrinsicContentSize
         
         //Display Window
         self.window?.makeKeyAndOrderFront(NSApplication.shared.delegate)
@@ -48,8 +66,7 @@ class MenuItemManager: NSObject, NSMenuDelegate {
         NSApplication.shared.terminate(self)
     }
     
-    //MARK: NSMenuDelegate
-    func menuWillOpen(_ menu: NSMenu) {
+    @objc public func reloadItemValues() {
         //Remove Previous Items
         self.menu.removeAllItems()
         
@@ -68,47 +85,60 @@ class MenuItemManager: NSObject, NSMenuDelegate {
         preferencesItem.target = self
         quitItem.target = self
         
-        if let shortcut = PreferencesManager.sharedInstance.shortCutForIdentifier(identifier: ShortCutIdentifier.reply) {
-            replyItem.isEnabled = true
-            replyItem.action = #selector(NotificationHandler.replyToNotification)
-            replyItem.target = NotificationHandler.sharedInstance
-            if let keyEquivalent = shortcut["characters"] as? String {
-                replyItem.keyEquivalent = keyEquivalent
+        //Configure for setup
+        if !Setup.appHasAccessibilityAccess() {
+            [replyItem, openItem, dismissItem].forEach { (item) in
+                item.isEnabled = false
+                item.state = .off
             }
-            if let flags = shortcut["modifierFlags"] as? String, let flagsInt = UInt(flags) {
-                replyItem.keyEquivalentModifierMask = NSEvent.ModifierFlags(rawValue: flagsInt)
-            }
+            
+            preferencesItem.title = "Set Up"
+            preferencesItem.action = #selector(self.showSetup)
         }
+        //Configure normally
         else {
-            replyItem.isEnabled = false
-        }
-        if let shortcut = PreferencesManager.sharedInstance.shortCutForIdentifier(identifier: ShortCutIdentifier.open) {
-            openItem.isEnabled = true
-            openItem.action = #selector(NotificationHandler.openNotification)
-            openItem.target = NotificationHandler.sharedInstance
-            if let keyEquivalent = shortcut["characters"] as? String {
-                openItem.keyEquivalent = keyEquivalent
+            if let shortcut = PreferencesManager.sharedInstance.shortCutForIdentifier(identifier: ShortCutIdentifier.reply) {
+                //replyItem.isEnabled = true
+                replyItem.action = #selector(NotificationHandler.replyToNotification)
+                replyItem.target = NotificationHandler.sharedInstance
+                if let keyEquivalent = shortcut["characters"] as? String {
+                    replyItem.keyEquivalent = keyEquivalent
+                }
+                if let flags = shortcut["modifierFlags"] as? String, let flagsInt = UInt(flags) {
+                    replyItem.keyEquivalentModifierMask = NSEvent.ModifierFlags(rawValue: flagsInt)
+                }
             }
-            if let flags = shortcut["modifierFlags"] as? String, let flagsInt = UInt(flags) {
-                openItem.keyEquivalentModifierMask = NSEvent.ModifierFlags(rawValue: flagsInt)
+            else {
+                replyItem.isEnabled = false
             }
-        }
-        else {
-            openItem.isEnabled = false
-        }
-        if let shortcut = PreferencesManager.sharedInstance.shortCutForIdentifier(identifier: ShortCutIdentifier.dismiss) {
-            dismissItem.isEnabled = true
-            dismissItem.action = #selector(NotificationHandler.closeNotification)
-            dismissItem.target = NotificationHandler.sharedInstance
-            if let keyEquivalent = shortcut["characters"] as? String {
-                dismissItem.keyEquivalent = keyEquivalent
+            if let shortcut = PreferencesManager.sharedInstance.shortCutForIdentifier(identifier: ShortCutIdentifier.open) {
+                //openItem.isEnabled = true
+                openItem.action = #selector(NotificationHandler.openNotification)
+                openItem.target = NotificationHandler.sharedInstance
+                if let keyEquivalent = shortcut["characters"] as? String {
+                    openItem.keyEquivalent = keyEquivalent
+                }
+                if let flags = shortcut["modifierFlags"] as? String, let flagsInt = UInt(flags) {
+                    openItem.keyEquivalentModifierMask = NSEvent.ModifierFlags(rawValue: flagsInt)
+                }
             }
-            if let flags = shortcut["modifierFlags"] as? String, let flagsInt = UInt(flags) {
-                dismissItem.keyEquivalentModifierMask = NSEvent.ModifierFlags(rawValue: flagsInt)
+            else {
+                openItem.isEnabled = false
             }
-        }
-        else {
-            dismissItem.isEnabled = false
+            if let shortcut = PreferencesManager.sharedInstance.shortCutForIdentifier(identifier: ShortCutIdentifier.dismiss) {
+                //dismissItem.isEnabled = true
+                dismissItem.action = #selector(NotificationHandler.closeNotification)
+                dismissItem.target = NotificationHandler.sharedInstance
+                if let keyEquivalent = shortcut["characters"] as? String {
+                    dismissItem.keyEquivalent = keyEquivalent
+                }
+                if let flags = shortcut["modifierFlags"] as? String, let flagsInt = UInt(flags) {
+                    dismissItem.keyEquivalentModifierMask = NSEvent.ModifierFlags(rawValue: flagsInt)
+                }
+            }
+            else {
+                dismissItem.isEnabled = false
+            }
         }
         
         //Add Items

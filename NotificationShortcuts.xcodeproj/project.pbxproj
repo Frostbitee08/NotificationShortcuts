@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		840E272922861E5F00B79A19 /* NotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840E272822861E5F00B79A19 /* NotificationHandler.swift */; };
 		848E8DC5228A47A5001F1AE2 /* PreferencesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848E8DC4228A47A5001F1AE2 /* PreferencesManager.swift */; };
+		84931440242D3F9F00BB3473 /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8493143F242D3F9F00BB3473 /* SetupViewController.swift */; };
 		8499CE56242C246A00A6D4AC /* AppMover.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84730ABD24286A0A002BA475 /* AppMover.framework */; };
 		8499CE57242C246A00A6D4AC /* AppMover.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 84730ABD24286A0A002BA475 /* AppMover.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8499CE58242C246B00A6D4AC /* LaunchAtLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841195A424285C77006BD721 /* LaunchAtLogin.framework */; };
@@ -72,6 +73,7 @@
 		84730ABD24286A0A002BA475 /* AppMover.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppMover.framework; path = Carthage/Build/Mac/AppMover.framework; sourceTree = "<group>"; };
 		84730AC2242871AB002BA475 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Carthage/Build/Mac/Sparkle.framework; sourceTree = "<group>"; };
 		848E8DC4228A47A5001F1AE2 /* PreferencesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesManager.swift; sourceTree = "<group>"; };
+		8493143F242D3F9F00BB3473 /* SetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupViewController.swift; sourceTree = "<group>"; };
 		8499CE4C242C216100A6D4AC /* SnapKit.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SnapKit.framework.dSYM; path = Carthage/Build/Mac/SnapKit.framework.dSYM; sourceTree = "<group>"; };
 		8499CE4D242C216100A6D4AC /* Sparkle.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Sparkle.framework.dSYM; path = Carthage/Build/Mac/Sparkle.framework.dSYM; sourceTree = "<group>"; };
 		8499CE4E242C216100A6D4AC /* ShortcutRecorder.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = ShortcutRecorder.framework.dSYM; path = Carthage/Build/Mac/ShortcutRecorder.framework.dSYM; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				840E272822861E5F00B79A19 /* NotificationHandler.swift */,
 				848E8DC4228A47A5001F1AE2 /* PreferencesManager.swift */,
 				84C478DF228629F8006BFD5B /* PreferencesViewController.swift */,
+				8493143F242D3F9F00BB3473 /* SetupViewController.swift */,
 				840E272A22861E6600B79A19 /* Supporting Files */,
 			);
 			path = NotificationShortcuts;
@@ -274,6 +277,7 @@
 				84DC7CED228529F400E144A2 /* AppDelegate.swift in Sources */,
 				84C478DE22862388006BFD5B /* MenuItemManager.swift in Sources */,
 				840E272922861E5F00B79A19 /* NotificationHandler.swift in Sources */,
+				84931440242D3F9F00BB3473 /* SetupViewController.swift in Sources */,
 				84C478E0228629F8006BFD5B /* PreferencesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

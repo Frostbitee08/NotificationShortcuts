@@ -9,6 +9,7 @@
 import Cocoa
 
 class PreferencesManager: NSObject {
+    static let shortcutsUpdatedNotification = Notification.init(name: Notification.Name.init("shortcutsUpdated"))
     static let sharedInstance = PreferencesManager()
     private let preferencesPath: String = {
         var path = NSString(string: NSHomeDirectory())
@@ -65,5 +66,6 @@ class PreferencesManager: NSObject {
     public func setShortCutForIdentifier(identifier: ShortCutIdentifier, shortCut: [AnyHashable : Any]) {
         self.preferences.setValue(shortCut, forKey: identifier.rawValue)
         self.writeToPreferencesFile()
+        NotificationCenter.default.post(PreferencesManager.shortcutsUpdatedNotification)
     }
 }

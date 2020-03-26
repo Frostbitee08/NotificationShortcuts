@@ -41,28 +41,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         AppMover.moveIfNecessary(message: "I can move myself to the Applications folder if you'd like. This will keep your Downloads folder uncluttered.")
         
         //Request accessibility access
-        if checkAccessibilityAccess() == false {
-            requestAccessibilityAccess()
+        if !Setup.appHasAccessibilityAccess() {
+            self.menuItemManager?.showSetup()
+        }
+        //Prompt user to set shortcuts if needed
+        else if !userHasShortcuts {
+            self.menuItemManager?.showPrefrences()
         }
         
         //Request script access
         self.requestScriptAccess()
         
-        //Prompt user to set shortcuts if needed
-        if !userHasShortcuts {
-            self.menuItemManager?.showPrefrences()
-        }
-    }
-    
-    //MARK: Helpers
-    private func checkAccessibilityAccess() -> Bool{
-        //get the value for accesibility
-        let checkOptPrompt = kAXTrustedCheckOptionPrompt.takeRetainedValue() as NSString
-        //set the options: false means it wont ask anyway
-        let options = [checkOptPrompt: false]
-        //translate into boolean value
-        let accessEnabled = AXIsProcessTrustedWithOptions(options as CFDictionary?)
-        return accessEnabled
+        //Monitor for accesibility changes
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(accessibilityAccessDidChange),
+                                               name: Setup.accessibilityAccessChangedNotification.name,
+                                               object: nil)
     }
     
     //MARK: Actions
@@ -76,11 +70,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let script = NSAppleScript(source: source)!
         var error: NSDictionary?
         let _ = script.executeAndReturnError(&error)
-    }
-    
-    private func requestAccessibilityAccess() {
-        let options: NSDictionary = [kAXTrustedCheckOptionPrompt.takeRetainedValue() as NSString: true]
-        AXIsProcessTrustedWithOptions(options)
     }
 
     func activateShortcuts() -> Bool {
@@ -105,6 +94,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         
         return activatedAtLeastOneShortcut
+    }
+    
+    @objc private func accessibilityAccessDidChange() {
+        self.menuItemManager?.reloadItemValues()
+        
+        if Setup.appHasAccessibilityAccess() && !self.activateShortcuts() {
+            self.menuItemManager?.showPrefrences()
+        }
+        else if !Setup.appHasAccessibilityAccess() {
+            self.menuItemManager?.showSetup()
+        }
     }
     
     //MARK: Debug
