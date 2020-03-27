@@ -37,9 +37,17 @@ fileprivate enum SetupStep:Int {
 fileprivate class SetupStepButton: NSView {
     public var isEnabled = false {
         didSet {
-            self.indexField.textColor = self.isEnabled ? .white : NSColor(red:0.93, green:0.93, blue:0.93, alpha:1.00)
-            self.indexField.backgroundColor = self.isEnabled ? .black : .lightGray
-            self.titleField.textColor = self.isEnabled ? .black : .lightGray
+            if #available(OSX 10.13, *) {
+                let whiteColor = NSColor(named: "WhiteColor")
+                let blackColor = NSColor(named: "BlackColor")
+                self.indexField.textColor = self.isEnabled ? whiteColor : NSColor(named: "BackgroundColor")
+                self.indexField.backgroundColor = self.isEnabled ? blackColor : .lightGray
+                self.titleField.textColor = self.isEnabled ? blackColor : .lightGray
+            } else {
+                self.indexField.textColor = self.isEnabled ? .white : NSColor(red:0.93, green:0.93, blue:0.93, alpha:1.00)
+                self.indexField.backgroundColor = self.isEnabled ? .black : .lightGray
+                self.titleField.textColor = self.isEnabled ? .black : .lightGray
+            }
         }
     }
     public var step: SetupStep = .one {
@@ -60,11 +68,17 @@ fileprivate class SetupStepButton: NSView {
     private let indexField: NSTextField = {
         let field = NSTextField()
         field.font = .systemFont(ofSize: 14)
-        field.textColor = NSColor(red:0.93, green:0.93, blue:0.93, alpha:1.00)
         field.alignment = .center
         field.backgroundColor = .lightGray
         field.stringValue = "0"
         field.usesSingleLineMode = true
+        
+        if #available(OSX 10.13, *) {
+            field.textColor = NSColor(named: "BackgroundColor")
+        } else {
+            field.textColor = NSColor(red:0.93, green:0.93, blue:0.93, alpha:1.00)
+        }
+        
         return field
     }()
     private let titleField: NSTextField = {
@@ -139,8 +153,6 @@ fileprivate class SetupStepButton: NSView {
     }
 }
 
-//TODO: Update this with dark mode
-//TODO: Update this to track when the user has enabled
 class SetupViewController: NSViewController {
     static let intrinsicContentSize: NSSize  = NSSize(width: 600, height: 500)
     
@@ -301,6 +313,11 @@ class SetupViewController: NSViewController {
                                           selector: #selector(moveToNextStep),
                                           userInfo: nil,
                                           repeats: true)
+        self.accessibilityTimer = Timer.scheduledTimer(timeInterval: 1,
+                                                       target: self,
+                                                       selector: #selector(checkAccessibilityStatus),
+                                                       userInfo: nil,
+                                                       repeats: true)
     }
     
     //MARK: Helpers
@@ -324,11 +341,6 @@ class SetupViewController: NSViewController {
         NSWorkspace.shared.open(settingsURL)
         self.currentStep = .two
         self.hasStarted = true
-        self.accessibilityTimer = Timer.scheduledTimer(timeInterval: 1,
-                                                       target: self,
-                                                       selector: #selector(checkAccessibilityStatus),
-                                                       userInfo: nil,
-                                                       repeats: true)
     }
     
     @objc private func checkAccessibilityStatus() {

@@ -3,6 +3,16 @@
     {
       "idiom" : "mac",
       "filename" : "Screen Shot 2020-03-26 at 1.10.39 PM copy.png"
+    },
+    {
+      "idiom" : "mac",
+      "filename" : "Screen Shot 2020-03-26 at 5.20.19 PM.png",
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ]
     }
   ],
   "info" : {
