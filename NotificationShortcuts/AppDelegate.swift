@@ -28,6 +28,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         //Configure Sparkle
         if let urlString = Bundle.main.object(forInfoDictionaryKey: "SUFeedURL") as? String, let url = URL(string: urlString) {
             SUUpdater.shared()?.feedURL = url
+            SUUpdater.shared()?.checkForUpdatesInBackground()
         }
         
         //Set Up Our Menu

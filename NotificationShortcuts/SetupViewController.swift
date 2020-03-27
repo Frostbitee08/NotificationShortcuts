@@ -345,6 +345,10 @@ class SetupViewController: NSViewController {
     
     @objc private func checkAccessibilityStatus() {
         if Setup.appHasAccessibilityAccess() {
+            self.accessibilityTimer?.invalidate()
+            self.stepTimer?.invalidate()
+            self.accessibilityTimer = nil
+            self.stepTimer = nil
             NotificationCenter.default.post(Setup.accessibilityAccessChangedNotification)
             self.view.window?.close()
         }
