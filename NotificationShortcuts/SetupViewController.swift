@@ -11,7 +11,15 @@ import Cocoa
 import SnapKit
 
 class Setup {
-    static let accessibilityAccessChangedNotification = Notification.init(name: Notification.Name.init("AccessibilityAccessChanged"))
+    static let setupCompletionChangedNotification = Notification.init(name: Notification.Name.init("SetupCompletionChanged"))
+    
+    static var completed: Bool {
+        if !Setup.appHasAccessibilityAccess() {
+            return false
+        }
+        return Setup.appHasScriptAccess()
+    }
+    
     static func appHasAccessibilityAccess() -> Bool{
         //get the value for accesibility
         let checkOptPrompt = kAXTrustedCheckOptionPrompt.takeRetainedValue() as NSString
@@ -20,6 +28,20 @@ class Setup {
         //translate into boolean value
         let accessEnabled = AXIsProcessTrustedWithOptions(options as CFDictionary?)
         return accessEnabled
+    }
+    
+    static func appHasScriptAccess() -> Bool {
+        let source = """
+        tell application "System Events"
+            tell process "Notification Center"
+                set theWindows to every window
+            end tell
+        end tell
+        """
+        let script = NSAppleScript(source: source)!
+        var error: NSDictionary?
+        let _ = script.executeAndReturnError(&error)
+        return error == nil
     }
 
     static func requestAccessibilityAccess() {
@@ -32,6 +54,7 @@ fileprivate enum SetupStep:Int {
     case one = 0
     case two = 1
     case three = 2
+    case four = 3
 }
 
 fileprivate class SetupStepButton: NSView {
@@ -157,7 +180,7 @@ class SetupViewController: NSViewController {
     static let intrinsicContentSize: NSSize  = NSSize(width: 600, height: 500)
     
     private var stepTimer: Timer?
-    private var accessibilityTimer: Timer?
+    private var completionTimer: Timer?
     private var hasStarted: Bool = false {
         didSet {
             self.startButton.isHidden = self.hasStarted
@@ -173,7 +196,7 @@ class SetupViewController: NSViewController {
     }
     private var currentStep: SetupStep = .one {
         didSet {
-            [stepOneButton, stepTwoButton, stepThreeButton].forEach { (button) in
+            self.stepButtons.forEach { (button) in
                 button.isEnabled = button.step == self.currentStep
             }
             instructionalImageView.image = self.image(for: self.currentStep)
@@ -183,7 +206,11 @@ class SetupViewController: NSViewController {
     private let instructionalImageView = NSImageView()
     private let stepOneButton = SetupStepButton(step: .one, title: "Click Start Button")
     private let stepTwoButton = SetupStepButton(step: .two, title: "Unlock System Preferences")
-    private let stepThreeButton = SetupStepButton(step: .three, title: "Select Notification Shortcuts")
+    private let stepThreeButton = SetupStepButton(step: .three, title: "Select Notification Shortcuts Accessibility")
+    private let stepFourButton = SetupStepButton(step: .four, title: "Select Notification Shortcuts Automation")
+    private var stepButtons: [SetupStepButton] {
+        return [stepOneButton, stepTwoButton, stepThreeButton, stepFourButton]
+    }
     private let waitingField: NSTextField = {
         let field = NSTextField()
         field.stringValue = "Waiting..."
@@ -220,7 +247,7 @@ class SetupViewController: NSViewController {
             string.append(value)
             return string
         }()
-        let buttonStackView = NSStackView(views: [stepOneButton, stepTwoButton, stepThreeButton])
+        let buttonStackView = NSStackView(views: stepButtons)
         let waitingStackView = NSStackView(views: [self.waitingField, self.waitingIndicator])
         
         //Set Group Properties
@@ -232,13 +259,13 @@ class SetupViewController: NSViewController {
             field.alignment       = .center
             field.backgroundColor = NSColor.clear
         })
-        [stepOneButton, stepTwoButton, stepThreeButton].forEach { (button) in
+        stepButtons.forEach { (button) in
             button.action = #selector(stepButtonPressed(button:))
             button.target = self
         }
         
         //Set Individual Properties
-        self.title                     = "Set Up"
+        self.title = "Set Up"
         self.startButton.bezelStyle = .rounded
         self.startButton.title = "Start"
         self.startButton.target = self
@@ -283,8 +310,8 @@ class SetupViewController: NSViewController {
         buttonStackView.snp.makeConstraints { (make) in
             make.left.equalTo(imageView)
             make.centerY.equalTo(instructionalImageView)
-            make.height.equalTo(130)
-            make.width.equalTo(150)
+            make.height.equalTo(215)
+            make.width.equalTo(175)
         }
         instructionalImageView.snp.makeConstraints { (make) in
             make.left.equalTo(buttonStackView.snp.right).offset(20)
@@ -309,15 +336,15 @@ class SetupViewController: NSViewController {
         
         //Start Cycle
         self.stepTimer = Timer.scheduledTimer(timeInterval: 2.5,
-                                          target: self,
-                                          selector: #selector(moveToNextStep),
-                                          userInfo: nil,
-                                          repeats: true)
-        self.accessibilityTimer = Timer.scheduledTimer(timeInterval: 1,
-                                                       target: self,
-                                                       selector: #selector(checkAccessibilityStatus),
-                                                       userInfo: nil,
-                                                       repeats: true)
+                                              target: self,
+                                              selector: #selector(moveToNextStep),
+                                              userInfo: nil,
+                                              repeats: true)
+        self.completionTimer = Timer.scheduledTimer(timeInterval: 1,
+                                                    target: self,
+                                                    selector: #selector(checkCompletionStatus),
+                                                    userInfo: nil,
+                                                    repeats: true)
     }
     
     //MARK: Helpers
@@ -329,33 +356,55 @@ class SetupViewController: NSViewController {
             return NSImage(named: "StepTwo")
         case .three:
             return NSImage(named: "StepThree")
+        case .four:
+            return NSImage(named: "StepFour")
         }
     }
     
     //MARK: Actions
     @objc private func start() {
-        guard let settingsURL = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility") else {
+        var settingsString = ""
+        var nextStep: SetupStep = .two
+        if !Setup.appHasAccessibilityAccess() {
+            settingsString = "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility"
+            nextStep = .two
+        }
+        else if !Setup.appHasScriptAccess() {
+            settingsString = "x-apple.systempreferences:com.apple.preference.security?Privacy_Automation"
+            nextStep = .four
+        }
+        
+        guard let settingsURL = URL(string: settingsString) else {
             return
         }
         
         NSWorkspace.shared.open(settingsURL)
-        self.currentStep = .two
+        self.currentStep = nextStep
         self.hasStarted = true
     }
     
-    @objc private func checkAccessibilityStatus() {
-        if Setup.appHasAccessibilityAccess() {
-            self.accessibilityTimer?.invalidate()
-            self.stepTimer?.invalidate()
-            self.accessibilityTimer = nil
-            self.stepTimer = nil
-            NotificationCenter.default.post(Setup.accessibilityAccessChangedNotification)
-            self.view.window?.close()
+    @objc private func checkCompletionStatus() {
+        //Check Accessibility Access
+        guard Setup.appHasAccessibilityAccess() else {
+            return
         }
+        
+        //Check Script Access
+        guard Setup.appHasScriptAccess() else {
+            return
+        }
+        
+        //Clean up
+        self.completionTimer?.invalidate()
+        self.stepTimer?.invalidate()
+        self.completionTimer = nil
+        self.stepTimer = nil
+        NotificationCenter.default.post(Setup.setupCompletionChangedNotification)
+        self.view.window?.close()
     }
     
     @objc private func stepButtonPressed(button: SetupStepButton) {
-        if !self.hasStarted || button.step != .one {
+        if (!self.hasStarted || button.step != .one) && !Setup.appHasAccessibilityAccess() {
             self.currentStep = button.step
         }
     }
@@ -364,9 +413,14 @@ class SetupViewController: NSViewController {
         if let nextStep = SetupStep(rawValue: self.currentStep.rawValue+1) {
             self.currentStep = nextStep
         }
+        else if !self.hasStarted {
+            self.currentStep = .one
+        }
+        else if !Setup.appHasAccessibilityAccess() {
+            self.currentStep = .two
+        }
         else {
-            self.currentStep = self.hasStarted ? .two : .one
+            self.currentStep = .four
         }
     }
 }
-

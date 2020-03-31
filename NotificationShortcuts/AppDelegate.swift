@@ -45,34 +45,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if !Setup.appHasAccessibilityAccess() {
             self.menuItemManager?.showSetup()
         }
+        //Request script access
+        else if !Setup.appHasScriptAccess() {
+            self.menuItemManager?.showSetup()
+        }
         //Prompt user to set shortcuts if needed
         else if !userHasShortcuts {
             self.menuItemManager?.showPrefrences()
         }
         
-        //Request script access
-        self.requestScriptAccess()
-        
         //Monitor for accesibility changes
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(accessibilityAccessDidChange),
-                                               name: Setup.accessibilityAccessChangedNotification.name,
+                                               selector: #selector(setupCompletionDidChange),
+                                               name: Setup.setupCompletionChangedNotification.name,
                                                object: nil)
     }
     
     //MARK: Actions
-    private func requestScriptAccess() {
-        let source = """
-        tell application "System Events"
-            tell process "Notification Center"
-            end tell
-        end tell
-        """
-        let script = NSAppleScript(source: source)!
-        var error: NSDictionary?
-        let _ = script.executeAndReturnError(&error)
-    }
-
     func activateShortcuts() -> Bool {
         var activatedAtLeastOneShortcut = false
         for shortCutIdentifier in [ShortCutIdentifier.reply, ShortCutIdentifier.open, ShortCutIdentifier.dismiss] {
@@ -97,13 +86,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return activatedAtLeastOneShortcut
     }
     
-    @objc private func accessibilityAccessDidChange() {
+    @objc private func setupCompletionDidChange() {
         self.menuItemManager?.reloadItemValues()
         
-        if Setup.appHasAccessibilityAccess() && !self.activateShortcuts() {
+        if Setup.completed && !self.activateShortcuts() {
             self.menuItemManager?.showPrefrences()
         }
-        else if !Setup.appHasAccessibilityAccess() {
+        else if !Setup.completed {
             self.menuItemManager?.showSetup()
         }
     }
