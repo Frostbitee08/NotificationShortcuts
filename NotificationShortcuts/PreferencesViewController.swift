@@ -211,24 +211,20 @@ class PreferencesViewController: NSViewController, RecorderControlDelegate {
                                                                    shortCut: [AnyHashable : Any]())
     }
     
-    func shortcutRecorder(_ aRecorder: RecorderControl, canRecordShortcut aShortcut: [AnyHashable : Any]) -> Bool {
-        guard let shortcut = Shortcut(dictionary: aShortcut) else {
-            return false
-        }
-        
+    func recorderControl(_ aControl: RecorderControl, canRecord aShortcut: Shortcut) -> Bool {
         let isTaken                       = false
         
-        if !isTaken, let identifier = self.shortCutIdentifier(for: aRecorder) {
-            let shortcutAction = ShortcutAction(shortcut: shortcut,
+        if !isTaken, let identifier = self.shortCutIdentifier(for: aControl) {
+            let shortcutAction = ShortcutAction(shortcut: aShortcut,
                                                 target: NotificationHandler.sharedInstance,
                                                 action: actionForIdentifier(identifier: identifier),
                                                 tag: 0)
             
-            GlobalShortcutMonitor.shared.removeAllActions(forShortcut: shortcut)
-            GlobalShortcutMonitor.shared.addAction(shortcutAction, forKeyEvent: .down) 
+            GlobalShortcutMonitor.shared.removeAllActions(forShortcut: aShortcut)
+            GlobalShortcutMonitor.shared.addAction(shortcutAction, forKeyEvent: .down)
             
             //Save Preference
-            PreferencesManager.sharedInstance.setShortCutForIdentifier(identifier: identifier, shortCut: aShortcut)
+            PreferencesManager.sharedInstance.setShortCutForIdentifier(identifier: identifier, shortCut: aShortcut.dictionaryRepresentation)
         }
         else {
             //TODO: Throw Error
@@ -236,14 +232,5 @@ class PreferencesViewController: NSViewController, RecorderControlDelegate {
         }
         
         return !isTaken
-    }
-    
-    func shortcutRecorderShouldBeginRecording(_ aRecorder: RecorderControl) -> Bool {
-        GlobalShortcutMonitor.shared.pause()
-        return true
-    }
-    
-    func shortcutRecorderDidEndRecording(_ aRecorder: RecorderControl) {
-        GlobalShortcutMonitor.shared.resume()
     }
 }
