@@ -6,7 +6,7 @@ NotificationShortcuts is a macOS app that allows users to respond to notificatio
 [![Swift Version][swift-image]][swift-url]
 
 ## Installation
-Download the latest version of NotificationShortcuts [here](https://delpriore-appcasts.s3-us-west-1.amazonaws.com/NotificationShortcuts+0.9.3.dmg).
+Download the latest version of NotificationShortcuts [here](https://delpriore-appcasts.s3-us-west-1.amazonaws.com/NotificationShortcuts-1.0.1.dmg).
 
 ## Usage
 NotificationShortcuts offers three ways to respond to a notification.
