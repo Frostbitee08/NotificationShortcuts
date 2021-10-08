@@ -1,5 +1,5 @@
-github "Kentzo/ShortcutRecorder" ~> 3.1
-github "SnapKit/SnapKit" ~> 5.0.0
+github "Kentzo/ShortcutRecorder" == 3.1
+github "SnapKit/SnapKit"
 github "Frostbitee08/AppMover"
 github "sparkle-project/Sparkle"
 github "sindresorhus/LaunchAtLogin"

@@ -62,7 +62,14 @@ isNotificationDisplayed
     //MARK: Public Actions
     @objc public func closeNotification() {
         if self.isNotificationDisplayed() {
-            self.clickDismiss()
+            if ProcessInfo.processInfo.operatingSystemVersion.majorVersion < 11 {
+                self.clickDismiss()
+            }
+            else {
+                self.moveMouseToTarget()
+                self.clickDismissBigSur()
+                self.moveMouseToOriginalLocation()
+            }
             
             if isNotificationDisplayed() {
                 self.killNotificationCenter()
@@ -79,10 +86,15 @@ isNotificationDisplayed
     @objc public func replyToNotification() {
         if self.isNotificationDisplayed() {
             self.moveMouseToTarget()
-            if ProcessInfo.processInfo.operatingSystemVersion.minorVersion < 15 {
-                self.clickLegacyReply()
-            } else {
-                self.clickReply()
+            if ProcessInfo.processInfo.operatingSystemVersion.majorVersion < 11 {
+                if ProcessInfo.processInfo.operatingSystemVersion.minorVersion < 15 {
+                    self.clickLegacyReply()
+                } else {
+                    self.clickReply()
+                }
+            }
+            else {
+                self.clickReplyBigSur()
             }
             self.moveMouseToOriginalLocation()
         }
@@ -92,6 +104,7 @@ isNotificationDisplayed
     private func moveMouseToTarget() {
         self.mouseLocation = NSEvent.mouseLocation
         self.moveMouse(position: CGPoint(x: (NSScreen.screens.first?.frame.width ?? 70)-70, y: 60.0))
+        
     }
     
     private func moveMouseToOriginalLocation() {
@@ -116,6 +129,36 @@ tell application "System Events"
         repeat with i from windowCount to 1 by -1
             click button "Close" of window i
         end repeat
+    end tell
+end tell
+"""
+        let _ = self.runAppleScript(source: source)
+    }
+    
+    private func clickDismissBigSur() {
+        let source = """
+tell application "System Events"
+    tell process "Notification Center"
+        set theWindow to window "Notification Center"
+        set sa to first scroll area of theWindow
+        set uie to first UI element of sa
+        set tg to first group of uie
+        click button "Close" of tg
+    end tell
+end tell
+"""
+        let _ = self.runAppleScript(source: source)
+    }
+    
+    private func clickReplyBigSur() {
+        let source = """
+tell application "System Events"
+    tell process "Notification Center"
+        set theWindow to window "Notification Center"
+        set sa to first scroll area of theWindow
+        set uie to first UI element of sa
+        set tg to first group of uie
+        click button "Reply" of tg
     end tell
 end tell
 """
