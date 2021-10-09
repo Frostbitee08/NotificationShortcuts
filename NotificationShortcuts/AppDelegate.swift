@@ -15,6 +15,7 @@ enum ShortCutIdentifier: String {
     case reply   = "NotificationShortCutsReply"
     case open    = "NotificationShortCutsOpen"
     case dismiss = "NotificationShortCutsClose"
+    case options = "NotificationShortCutsOptions"
 }
 
 @NSApplicationMain
@@ -64,7 +65,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     //MARK: Actions
     func activateShortcuts() -> Bool {
         var activatedAtLeastOneShortcut = false
-        for shortCutIdentifier in [ShortCutIdentifier.reply, ShortCutIdentifier.open, ShortCutIdentifier.dismiss] {
+        for shortCutIdentifier in [ShortCutIdentifier.reply, ShortCutIdentifier.open, ShortCutIdentifier.dismiss, ShortCutIdentifier.options] {
             guard
                 let shortCutDictionary = PreferencesManager.sharedInstance.shortCutForIdentifier(identifier: shortCutIdentifier),
                 let shortcut = Shortcut(dictionary: shortCutDictionary)

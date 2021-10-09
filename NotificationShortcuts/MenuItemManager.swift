@@ -73,6 +73,7 @@ class MenuItemManager: NSObject, NSMenuDelegate {
         //Instantiate Local Varibales
         let replyItem           = NSMenuItem(title: "Reply Shortcut", action: nil, keyEquivalent: "")
         let openItem            = NSMenuItem(title: "Open Shortcut", action: nil, keyEquivalent: "")
+        let optionsItem         = NSMenuItem(title: "Options Shortcut", action: nil, keyEquivalent: "")
         let dismissItem         = NSMenuItem(title: "Dismiss Shortcut", action: nil, keyEquivalent: "")
         let seperatorItem1      = NSMenuItem.separator()
         let checkForUpdatesItem = NSMenuItem(title: "Check for Updates", action: #selector(self.checkForUpdates), keyEquivalent: "")
@@ -136,14 +137,28 @@ class MenuItemManager: NSObject, NSMenuDelegate {
                     dismissItem.keyEquivalentModifierMask = NSEvent.ModifierFlags(rawValue: flagsInt)
                 }
             }
+            if let shortcut = PreferencesManager.sharedInstance.shortCutForIdentifier(identifier: ShortCutIdentifier.options) {
+                //optionsItem.isEnabled = true
+                optionsItem.action = #selector(NotificationHandler.openOptionsForNotifications)
+                optionsItem.target = NotificationHandler.sharedInstance
+                if let keyEquivalent = shortcut["characters"] as? String {
+                    optionsItem.keyEquivalent = keyEquivalent
+                }
+                if let flags = shortcut["modifierFlags"] as? String, let flagsInt = UInt(flags) {
+                    optionsItem.keyEquivalentModifierMask = NSEvent.ModifierFlags(rawValue: flagsInt)
+                }
+            }
             else {
-                dismissItem.isEnabled = false
+                optionsItem.isEnabled = false
             }
         }
         
         //Add Items
         self.menu.addItem(replyItem)
         self.menu.addItem(openItem)
+        if (ProcessInfo.processInfo.operatingSystemVersion.majorVersion >= 11) {
+            self.menu.addItem(optionsItem)
+        }
         self.menu.addItem(dismissItem)
         self.menu.addItem(seperatorItem1)
         self.menu.addItem(checkForUpdatesItem)

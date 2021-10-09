@@ -17,6 +17,8 @@ func actionForIdentifier(identifier: ShortCutIdentifier) -> Selector {
         return #selector(NotificationHandler.openNotification)
     case .dismiss:
         return #selector(NotificationHandler.closeNotification)
+    case .options:
+        return #selector(NotificationHandler.openOptionsForNotifications)
     }
 }
 
@@ -98,6 +100,12 @@ isNotificationDisplayed
             }
             self.moveMouseToOriginalLocation()
         }
+    }
+    
+    @objc public func openOptionsForNotifications() {
+        self.moveMouseToTarget()
+        self.openOptions()
+        self.moveMouseToOriginalLocation()
     }
     
     //MARK: Private Actions
@@ -218,6 +226,21 @@ tell application "System Events"
         set theWindow to item 1 of theWindows
 
         click theWindow
+    end tell
+end tell
+"""
+        let _ = self.runAppleScript(source: source)
+    }
+    
+    private func openOptions() {
+        let source = """
+tell application "System Events"
+    tell process "Notification Center"
+        set theWindow to window "Notification Center"
+        set sa to first scroll area of theWindow
+        set uie to first UI element of sa
+        set tg to first group of uie
+        click menu button "Options" of tg
     end tell
 end tell
 """
